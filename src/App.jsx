@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import {  HashRouter as Router ,Routes, Route, Navigate } from "react-router-dom";
 import UserLogin from "./components/UserLogin";
 import UserSignup from "./components/UserSignup";
 import EmployeeList from "./components/EmployeeList";
@@ -39,6 +39,7 @@ import Notifications from "./components/Notifications/Notifications";
 
 function App() {
   return (
+    <Router>
     <Routes>
       {/* Default */}
       <Route path="/" element={<Navigate to="/login" replace />} />
@@ -87,7 +88,7 @@ function App() {
           <Route path="stock" element={<StockInventory/>} />
         </Route>
       </Route>
-    </Routes>
+    </Routes></Router>
   );
 }
 
