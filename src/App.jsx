@@ -75,7 +75,7 @@ function App() {
 <Route path="/buffaloreports" element={<BuffaloReports/>}/>
 
 <Route path="/alldropdowns" element={<AllDropDowns />}/>
-<Route path="/notifications" element={<Notifications/>}/>
+{/* <Route path="/notifications" element={<Notifications/>}/> */}
 <Route path="/fodder" element={<FodderList />}/>
         <Route path="/animals/heat/:tagNo" element={<HealthTab />} />
         <Route path="pastures" element={<Pastures />}/>

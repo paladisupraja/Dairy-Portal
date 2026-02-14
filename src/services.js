@@ -474,10 +474,10 @@ export const getAnimalsByType=async(params)=>{
   return await axios.get(`${API_URL}/getAnimalsByTypeAPI`,{params});
 }
 
-export const getNotifications = async (params) => {
+// export const getNotifications = async (params) => {
   
-    return await axios.get(`${API_URL}/getNotificationsByFarm/${params}`);
-  } 
+//     return await axios.get(`${API_URL}/getNotificationsByFarm/${params}`);
+//   } 
     // Admin → All notifications
    
 
