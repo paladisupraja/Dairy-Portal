@@ -12,9 +12,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <SnackbarProvider>
       {/* <NotificationProvider> */}
         <Router>
-      <BrowserRouter> {/* ✅ wrap your app */}
+      {/* <BrowserRouter> ✅ wrap your app */}
         <App />
-      </BrowserRouter></Router>
+      {/* </BrowserRouter> */}</Router>
       {/* </NotificationProvider> */}
     </SnackbarProvider>
   </React.StrictMode>
