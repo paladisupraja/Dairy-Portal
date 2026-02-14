@@ -3,7 +3,7 @@ import { Box, CssBaseline, AppBar, Toolbar, IconButton, Typography,Badge } from 
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useNavigate } from "react-router-dom";
-// import { NotificationContext } from "../context/NotificationContext";
+import { NotificationContext } from "../context/NotificationContext";
 
 import SideNav from "./SideNav";
 import { Outlet } from "react-router-dom";
@@ -17,7 +17,7 @@ const Layout = () => {
 
 
   const toggleDrawer = () => setOpen(!open);
-  // const { unreadCount } = useContext(NotificationContext);
+  const { unreadCount } = useContext(NotificationContext);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -43,7 +43,7 @@ const Layout = () => {
   </Typography>
 
   {/* 🔔 Notifications */}
-  {/* <IconButton color="inherit" onClick={() => navigate("/notifications")}>
+  <IconButton color="inherit" onClick={() => navigate("/notifications")}>
   <Badge
   badgeContent={unreadCount}
   color="error"
@@ -53,7 +53,7 @@ const Layout = () => {
   <NotificationsIcon />
 </Badge>
 
-</IconButton> */}
+</IconButton>
 
 
         </Toolbar>

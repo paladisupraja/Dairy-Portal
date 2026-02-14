@@ -474,13 +474,14 @@ export const getAnimalsByType=async(params)=>{
   return await axios.get(`${API_URL}/getAnimalsByTypeAPI`,{params});
 }
 
-// export const getNotifications = async (params) => {
-  
-//     return await axios.get(`${API_URL}/getNotificationsByFarm/${params}`);
-//   } 
+export const getNotifications = async (farmId, role) => {
+  if (role === "employee" && farmId) {
+    return await axios.get(`${API_URL}/getNotificationsByFarm/${farmId}`);
+  } else {
     // Admin → All notifications
-   
-
+    return await axios.get(`${API_URL}/getNotificationsByFarm`);
+  }
+};
 
 export const markAsReadNotifications=async(data)=>{
   return await axios.post(`${API_URL}/markNotificationsAsRead`,data)

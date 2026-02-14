@@ -1,4 +1,4 @@
-import {  HashRouter as Router ,Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import UserLogin from "./components/UserLogin";
 import UserSignup from "./components/UserSignup";
 import EmployeeList from "./components/EmployeeList";
@@ -39,7 +39,6 @@ import Notifications from "./components/Notifications/Notifications";
 
 function App() {
   return (
-    <Router>
     <Routes>
       {/* Default */}
       <Route path="/" element={<Navigate to="/login" replace />} />
@@ -76,7 +75,7 @@ function App() {
 <Route path="/buffaloreports" element={<BuffaloReports/>}/>
 
 <Route path="/alldropdowns" element={<AllDropDowns />}/>
-{/* <Route path="/notifications" element={<Notifications/>}/> */}
+<Route path="/notifications" element={<Notifications/>}/>
 <Route path="/fodder" element={<FodderList />}/>
         <Route path="/animals/heat/:tagNo" element={<HealthTab />} />
         <Route path="pastures" element={<Pastures />}/>
@@ -88,7 +87,7 @@ function App() {
           <Route path="stock" element={<StockInventory/>} />
         </Route>
       </Route>
-    </Routes></Router>
+    </Routes>
   );
 }
 
