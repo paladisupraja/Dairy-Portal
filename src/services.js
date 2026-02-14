@@ -476,7 +476,7 @@ export const getAnimalsByType=async(params)=>{
 
 export const getNotifications = async (params) => {
   
-    return await axios.get(`${API_URL}/getNotificationsByFarm/${params}`);
+    return await axios.get(`${API_URL}/getNotificationsByFarm`,{params});
  
 }
 
