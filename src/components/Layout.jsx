@@ -43,7 +43,7 @@ const Layout = () => {
   </Typography>
 
   {/* 🔔 Notifications */}
-  <IconButton color="inherit" onClick={() => navigate("/notifications")}>
+  {/* <IconButton color="inherit" onClick={() => navigate("/notifications")}>
   <Badge
   badgeContent={unreadCount}
   color="error"
@@ -53,7 +53,7 @@ const Layout = () => {
   <NotificationsIcon />
 </Badge>
 
-</IconButton>
+</IconButton> */}
 
 
         </Toolbar>
