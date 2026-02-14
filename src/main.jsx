@@ -9,11 +9,11 @@ import { NotificationProvider } from "./context/NotificationContext"
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <SnackbarProvider>
-      <NotificationProvider>
+      {/* <NotificationProvider> */}
       <BrowserRouter> {/* ✅ wrap your app */}
         <App />
       </BrowserRouter>
-      </NotificationProvider>
+      {/* </NotificationProvider> */}
     </SnackbarProvider>
   </React.StrictMode>
 );
