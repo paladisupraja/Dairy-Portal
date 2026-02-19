@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState ,useContext} from "react";
 import { Login } from "../services";
 import { useSnackbar } from "../context/SnackbarContext";
 import { Link, useNavigate } from "react-router-dom";
+import { NotificationContext } from "../context/NotificationContext";
 
 import { Box, Card, CardContent, TextField, Button, Typography } from "@mui/material";
 
@@ -10,6 +11,7 @@ const UserLogin = () => {
   const [password, setPassword] = useState("");
 
   const { showSnackbar } = useSnackbar();
+  const { loadNotifications } = useContext(NotificationContext);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -29,6 +31,7 @@ const UserLogin = () => {
 
         setMobileNumber("");
         setPassword("");
+          await loadNotifications(); 
         navigate("/counts");
       }
     } catch (error) {
@@ -51,8 +54,10 @@ const UserLogin = () => {
             label="Mobile Number"
             variant="outlined"
             margin="normal"
+            placeholder="Enter Mobile Number"
             value={mobile_num}
             onChange={(e) => setMobileNumber(e.target.value)}
+            inputProps={{maxLength: 10}}
           />
 
           <TextField
@@ -61,16 +66,20 @@ const UserLogin = () => {
             type="password"
             variant="outlined"
             margin="normal"
+            placeholder="Enter Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <Button fullWidth variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleLogin}>
+          <Button fullWidth variant="contained" color="primary" sx={{ mt: 2 ,
+    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
+    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
+  }} onClick={handleLogin}>
             Login
           </Button>
 
           <Typography align="center" sx={{ mt: 2 }}>
-            Don't have an account? <Link to="/signup">Sign Up</Link>
+            Don't have an account? <Link to="/signup" style={{color:"rgb(42,8,11)"}}>Sign Up</Link>
           </Typography>
         </CardContent>
       </Card>

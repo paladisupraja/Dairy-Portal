@@ -56,7 +56,7 @@ const FodderList = () => {
   if (loading) return <CircularProgress />;
 
   return (
-    <Box p={3}>
+    <Box p={0}>
       <Grid container spacing={2}>
         {/* Fodder Types */}
         <Grid item xs={12} sm={4}>

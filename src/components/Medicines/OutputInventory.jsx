@@ -126,7 +126,7 @@ const OutputInventory = () => {
   return (
     <Box p={3}>
       {/* HEADER */}
-      <Box display="flex" justifyContent="space-between" mb={2}>
+      <Box display="flex" justifyContent="space-between" mb={1}>
         <Typography variant="h5" fontWeight={600}>
           Medicine Consumption
         </Typography>
@@ -137,7 +137,7 @@ const OutputInventory = () => {
       </Box>
 
       {/* SEARCH */}
-      <Card sx={{ mb: 2 }}>
+      <Card sx={{ mb: 1}}>
         <CardContent>
           <TextField
             fullWidth
@@ -157,14 +157,14 @@ const OutputInventory = () => {
               <CircularProgress />
             </Box>
           ) : (
-            <Table>
+            <Table size="small">
               <TableHead>
                 <TableRow>
-                  <TableCell>Animal Tag</TableCell>
-                  <TableCell>Medicine ID</TableCell>
-                  <TableCell>Dosage</TableCell>
-                  <TableCell>Duration</TableCell>
-                  <TableCell>Date</TableCell>
+                  <TableCell><b>Animal Tag</b></TableCell>
+                  <TableCell><b>Medicine ID</b></TableCell>
+                  <TableCell><b>Dosage</b></TableCell>
+                  <TableCell><b>Duration</b></TableCell>
+                  <TableCell><b>Date</b></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

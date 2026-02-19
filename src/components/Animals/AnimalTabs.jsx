@@ -31,10 +31,11 @@ const AnimalTabs = ({ tagNo, animalId }) => { // ✅ get animalId from props
                     padding: "12px 0",
                     minWidth: "auto",
                   },
-                  "& .Mui-selected": {
-                    color: "rgb(42,8,11)",
-                    fontWeight: 600,
-                  },
+                  
+                   "& .MuiTab-root.Mui-selected": {
+              color: "rgb(42,8,11)",
+              fontWeight: 600,
+            },
                 }}
                 TabIndicatorProps={{
                   sx: {

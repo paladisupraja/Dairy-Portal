@@ -113,7 +113,7 @@ const Pastures = () => {
   };
 
   return (
-    <Box p={3}>
+    <Box p={0}>
       <Card>
         <CardContent>
           <Box display="flex" justifyContent="space-between" mb={2}>

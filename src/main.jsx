@@ -4,16 +4,21 @@ import { BrowserRouter } from "react-router-dom"; // ✅ import router
 import App from "./App";
 import './index.css'
 import SnackbarProvider from "./context/SnackbarContext";
-import { NotificationProvider } from "./context/NotificationContext"
+import { NotificationProvider } from "./context/NotificationContext";
+import { AnimalDropdownProvider } from "./context/AnimalDropdownContext";
+import { EmployeeProvider } from "./context/EmployeeContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <SnackbarProvider>
-      <NotificationProvider>
+      <AnimalDropdownProvider>
+        <EmployeeProvider>
+        <NotificationProvider>
       <BrowserRouter> {/* ✅ wrap your app */}
         <App />
       </BrowserRouter>
-      </NotificationProvider>
+      </NotificationProvider></EmployeeProvider>
+      </AnimalDropdownProvider>
     </SnackbarProvider>
   </React.StrictMode>
 );

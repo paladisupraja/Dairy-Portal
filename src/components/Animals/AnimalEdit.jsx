@@ -1,26 +1,52 @@
 import React from "react";
-import { Box, Card, CardContent, Typography ,Button} from "@mui/material";
-import { useParams, useLocation,useNavigate } from "react-router-dom";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  IconButton
+} from "@mui/material";
+
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import EditIcon from "@mui/icons-material/Edit";
+
 import AnimalTabs from "./AnimalTabs";
 
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-
-
 const AnimalEdit = () => {
+
   const { tagNo } = useParams();
   const location = useLocation();
-  const navigate = useNavigate(); // ✅ FIX ADDED HERE
+  const navigate = useNavigate();
+
+  const animalId = location.state?.animalId;
+
+  console.log("AnimalEdit animalId:", animalId);
 
   const handleBack = () => {
     navigate("/animals");
   };
-  // ✅ get animalId from navigation state
-  const animalId = location.state?.animalId;
+
+  const handleEditClick = () => {
+
+    if (!animalId) {
+      alert("Animal Id Missing");
+      return;
+    }
+
+    navigate("/edit-animal-form", {
+      state: {
+        animalId,
+        tagNo
+      }
+    });
+  };
 
   return (
     <Box p={3}>
-      
-            <Button
+
+      <Button
               startIcon={<ArrowBackIcon />}
               onClick={handleBack}
               sx={{
@@ -31,21 +57,32 @@ const AnimalEdit = () => {
             >
               Back
             </Button>
-      <Card>
-        <CardContent>
-          
+
+      <Card sx={{ mt: 2 }}>
+        <CardContent sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}>
+
           <Typography variant="h6">
             Edit Animal – Tag No: <b>{tagNo}</b>
           </Typography>
+
+          <IconButton onClick={handleEditClick} sx={{color:"rgb(42,8,11)"}}>
+            <EditIcon />
+          </IconButton>
+
         </CardContent>
       </Card>
 
       <Box mt={3}>
-        {/* ✅ pass both tagNo and animalId */}
         <AnimalTabs tagNo={tagNo} animalId={animalId} />
       </Box>
+
     </Box>
   );
 };
+
 
 export default AnimalEdit;

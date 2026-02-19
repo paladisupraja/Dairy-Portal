@@ -151,7 +151,7 @@ const GroupsList = () => {
   }
 
   return (
-    <Box sx={{ p: 3, backgroundColor: "#f4f6f8", minHeight: "100vh" }}>
+    <Box sx={{ p: 0, minHeight: "100vh" }}>
       {/* Header */}
       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
         <Typography variant="h5" fontWeight={600}>

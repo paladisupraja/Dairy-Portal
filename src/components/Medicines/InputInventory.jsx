@@ -24,6 +24,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useSnackbar } from "../../context/SnackbarContext";
 import {
   getAllMedicines,
+  getMedicineList,
   getMedicineCategories,
   addMedicine,
   getVendors,
@@ -31,15 +32,17 @@ import {
 } from "../../services";
 
 /* ✅ Fixed Medicine Names */
-const MEDICINE_LIST = ["Dolo", "Paracetamol", "Oxytocin"];
+
+
+// ...import statements same as yours
 
 const InputInventory = () => {
   const { showSnackbar } = useSnackbar();
 
-  /* ================= STATE ================= */
   const [inventory, setInventory] = useState([]);
   const [categories, setCategories] = useState([]);
   const [vendors, setVendors] = useState([]);
+  const [getMedicineLists, setMedicineLists] = useState([]);
   const [units, setUnits] = useState([]);
 
   const [search, setSearch] = useState("");
@@ -63,14 +66,24 @@ const InputInventory = () => {
 
   const today = new Date().toISOString().split("T")[0];
 
-  /* ================= API CALLS ================= */
+  // ================= API CALLS =================
   useEffect(() => {
+    fetchMedicineLists();
     fetchInitialData();
   }, []);
 
   useEffect(() => {
     fetchInventory();
   }, [search, categoryFilter]);
+
+  const fetchMedicineLists = async () => {
+    try {
+      const res = await getMedicineList();
+      setMedicineLists(res.data?.details || []);
+    } catch {
+      showSnackbar("Failed to load medicine names", "error");
+    }
+  };
 
   const fetchInitialData = async () => {
     fetchInventory();
@@ -110,22 +123,38 @@ const InputInventory = () => {
     setUnits(res.data?.details || []);
   };
 
-  /* ================= HANDLERS ================= */
+  // ================= HANDLERS =================
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  /* ✅ VALIDATION – ALL FIELDS REQUIRED */
+  // ✅ VALIDATION
   const validateForm = () => {
     const e = {};
+
+    // Required fields
     Object.keys(formData).forEach((key) => {
       if (!formData[key]) e[key] = "Required";
     });
 
+    // Quantity, Price, Min Stock must be numbers > 0
+    if (formData.quantity && (isNaN(formData.quantity) || Number(formData.quantity) <= 0)) {
+      e.quantity = "Quantity must be a positive number";
+    }
+
+    if (formData.price_per_unit && (isNaN(formData.price_per_unit) || Number(formData.price_per_unit) <= 0)) {
+      e.price_per_unit = "Price must be a positive number";
+    }
+
+    if (formData.min_stock && (isNaN(formData.min_stock) || Number(formData.min_stock) < 0)) {
+      e.min_stock = "Min Stock cannot be negative";
+    }
+
+    // Date validations
     if (
       formData.manufactured_date &&
       formData.expiry_date &&
-      formData.manufactured_date >= formData.expiry_date
+      new Date(formData.manufactured_date) >= new Date(formData.expiry_date)
     ) {
       e.expiry_date = "Expiry must be after manufactured date";
     }
@@ -165,22 +194,22 @@ const InputInventory = () => {
 
   const isExpired = (date) => date && new Date(date) < new Date();
 
-  /* ================= UI ================= */
+  // ================= UI =================
   return (
     <Box p={3}>
       {/* HEADER */}
-      <Box display="flex" justifyContent="space-between" mb={2}>
+      <Box display="flex" justifyContent="space-between" mb={1}>
         <Typography variant="h5" fontWeight={600}>
           Inventory Management
         </Typography>
-        <IconButton sx={{color:"rgb(42,8,11)"}}onClick={() => setOpenAdd(true)}>
+        <IconButton sx={{ color: "rgb(42,8,11)" }} onClick={() => setOpenAdd(true)}>
           <AddIcon />
         </IconButton>
       </Box>
 
       {/* SEARCH & FILTER */}
-      <Card sx={{ mb: 2 }}>
-        <CardContent sx={{ display: "flex", gap: 2 }}>
+      <Card sx={{ mb: 1 }}>
+        <CardContent sx={{ display: "flex", gap: 1 }}>
           <TextField
             label="Search Medicine"
             value={search}
@@ -193,7 +222,7 @@ const InputInventory = () => {
             label="Category"
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            sx={{ minWidth: 200 }}
+            sx={{ minWidth: 300 }}
           >
             <MenuItem value="all">All</MenuItem>
             {categories.map((c) => (
@@ -213,16 +242,16 @@ const InputInventory = () => {
               <CircularProgress />
             </Box>
           ) : (
-            <Table>
+            <Table size="small">
               <TableHead>
                 <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Category</TableCell>
-                  <TableCell>Qty</TableCell>
-                  <TableCell>Unit</TableCell>
-                  <TableCell>Price</TableCell>
-                  <TableCell>Expiry</TableCell>
-                  <TableCell>Status</TableCell>
+                  <TableCell><b>Name</b></TableCell>
+                  <TableCell><b>Category</b></TableCell>
+                  <TableCell><b>Qty</b></TableCell>
+                  <TableCell><b>Unit</b></TableCell>
+                  <TableCell><b>Price</b></TableCell>
+                  <TableCell><b>Expiry</b></TableCell>
+                  <TableCell><b>Status</b></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -267,25 +296,47 @@ const InputInventory = () => {
       <Dialog open={openAdd} onClose={() => setOpenAdd(false)} fullWidth maxWidth="sm">
         <DialogTitle>Add Medicine</DialogTitle>
         <DialogContent sx={{ display: "grid", gap: 2, mt: 1 }}>
-          <TextField select label="Medicine Name" name="name"
-            value={formData.name} onChange={handleChange}
-            error={!!errors.name} helperText={errors.name}>
-            {MEDICINE_LIST.map((m) => (
-              <MenuItem key={m} value={m}>{m}</MenuItem>
+          <TextField
+            select
+            label="Medicine Name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            error={!!errors.name}
+            helperText={errors.name}
+          >
+            {getMedicineLists.map((m) => (
+              <MenuItem key={m.id} value={m.name}>
+                {m.name}
+              </MenuItem>
             ))}
           </TextField>
 
-          <TextField select label="Category" name="category"
-            value={formData.category} onChange={handleChange}
-            error={!!errors.category} helperText={errors.category}>
+          <TextField
+            select
+            label="Category"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            error={!!errors.category}
+            helperText={errors.category}
+          >
             {categories.map((c) => (
-              <MenuItem key={c.id} value={c.name}>{c.name}</MenuItem>
+              <MenuItem key={c.id} value={c.name}>
+                {c.name}
+              </MenuItem>
             ))}
           </TextField>
 
-          <TextField select label="Vendor" name="vendor_id"
-            value={formData.vendor_id} onChange={handleChange}
-            error={!!errors.vendor_id} helperText={errors.vendor_id}>
+          <TextField
+            select
+            label="Vendor"
+            name="vendor_id"
+            value={formData.vendor_id}
+            onChange={handleChange}
+            error={!!errors.vendor_id}
+            helperText={errors.vendor_id}
+          >
             {vendors.map((v) => (
               <MenuItem key={v.vendor_id} value={v.vendor_id}>
                 {v.vendor_name}
@@ -293,46 +344,104 @@ const InputInventory = () => {
             ))}
           </TextField>
 
-          <TextField label="Quantity" name="quantity"
-            value={formData.quantity} onChange={handleChange}
-            error={!!errors.quantity} helperText={errors.quantity} />
+          <TextField
+            label="Quantity"
+            name="quantity"
+            value={formData.quantity}
+            onChange={handleChange}
+            error={!!errors.quantity}
+            helperText={errors.quantity}
+          />
 
-          <TextField select label="Unit" name="unit"
-            value={formData.unit} onChange={handleChange}
-            error={!!errors.unit} helperText={errors.unit}>
+          <TextField
+            select
+            label="Unit"
+            name="unit"
+            value={formData.unit}
+            onChange={handleChange}
+            error={!!errors.unit}
+            helperText={errors.unit}
+          >
             {units.map((u) => (
-              <MenuItem key={u.id} value={u.code}>{u.label}</MenuItem>
+              <MenuItem key={u.id} value={u.code}>
+                {u.label}
+              </MenuItem>
             ))}
           </TextField>
 
-          <TextField label="Price per Unit" name="price_per_unit"
-            value={formData.price_per_unit} onChange={handleChange}
-            error={!!errors.price_per_unit} helperText={errors.price_per_unit} />
+          <TextField
+            label="Price per Unit"
+            type="number"
+            name="price_per_unit"
+            value={formData.price_per_unit}
+            onChange={handleChange}
+            error={!!errors.price_per_unit}
+            inputProps={{ min: 1 }}
+            helperText={errors.price_per_unit}
+          />
 
-          <TextField type="date" label="Purchase Date" name="purchase_date"
+          <TextField
+            type="date"
+            label="Purchase Date"
+            name="purchase_date"
             InputLabelProps={{ shrink: true }}
-            value={formData.purchase_date} onChange={handleChange}
-            error={!!errors.purchase_date} helperText={errors.purchase_date} />
+            inputProps={{max:today}}
+            value={formData.purchase_date}
+            onChange={handleChange}
+            error={!!errors.purchase_date}
+            helperText={errors.purchase_date}
+          />
 
-          <TextField type="date" label="Manufactured Date" name="manufactured_date"
-            InputLabelProps={{ shrink: true }} inputProps={{ max: today }}
-            value={formData.manufactured_date} onChange={handleChange}
-            error={!!errors.manufactured_date} helperText={errors.manufactured_date} />
+          <TextField
+            type="date"
+            label="Manufactured Date"
+            name="manufactured_date"
+            InputLabelProps={{ shrink: true }}
+            inputProps={{ max: today }}
+            value={formData.manufactured_date}
+            onChange={handleChange}
+            error={!!errors.manufactured_date}
+            helperText={errors.manufactured_date}
+          />
 
-          <TextField type="date" label="Expiry Date" name="expiry_date"
-            InputLabelProps={{ shrink: true }} inputProps={{ min: today }}
-            value={formData.expiry_date} onChange={handleChange}
-            error={!!errors.expiry_date} helperText={errors.expiry_date} />
+          <TextField
+            type="date"
+            label="Expiry Date"
+            name="expiry_date"
+            InputLabelProps={{ shrink: true }}
+            inputProps={{ min: today }}
+            value={formData.expiry_date}
+            onChange={handleChange}
+            error={!!errors.expiry_date}
+            helperText={errors.expiry_date}
+          />
 
-          <TextField label="Min Stock" name="min_stock"
-            value={formData.min_stock} onChange={handleChange}
-            error={!!errors.min_stock} helperText={errors.min_stock} />
+          <TextField
+            label="Min Stock"
+            name="min_stock"
+             type="number"
+            value={formData.min_stock}
+            onChange={handleChange}
+            error={!!errors.min_stock}
+             inputProps={{ min: 1 }}
+            helperText={errors.min_stock}
+          />
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpenAdd(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" onClick={handleAddMedicine} sx={{ backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },}}>Add</Button>
+          <Button onClick={() => setOpenAdd(false)} sx={{ color: "rgb(42,8,11)" }}>
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleAddMedicine}
+            sx={{
+              backgroundColor: "rgb(42, 8, 11)",
+              "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
+            }}
+          >
+            Add
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>
@@ -340,3 +449,5 @@ const InputInventory = () => {
 };
 
 export default InputInventory;
+
+

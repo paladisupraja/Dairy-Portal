@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getEmployees } from "../services";
-import { useSnackbar } from "../context/SnackbarContext";
+import { getEmployees } from "../../services";
+import { useSnackbar } from "../../context/SnackbarContext";
 import { useNavigate, Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import {
@@ -50,8 +50,8 @@ const EmployeeList = () => {
   };
 
   return (
-    <Box p={3}>
-      <Card>
+    <Box p={0} >
+      <Card >
         <CardContent>
           <Box display="flex" justifyContent="space-between" mb={2}>
             <Typography variant="h5">Employee List</Typography>

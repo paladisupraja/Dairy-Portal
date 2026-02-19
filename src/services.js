@@ -377,11 +377,15 @@ export const deleteAnimalLifecycle=async(data)=>{
   return await axios.post(`${API_URL}/deleteAnimalLifecycle`,data);
 }
 
-export const getEmployeeDropdown = async (type) => {
-  return await axios.get(
-    `${API_URL}/dropdown/getEmployeeDropdown?type=${type}`
-  );
+// export const getEmployeeDropdown = async (type) => {
+//   return await axios.get(
+//     `${API_URL}/dropdown/getEmployeeDropdown?type=${type}`
+//   );
+// };
+export const getEmployeeDropdown = async (type, parent = "") => {
+  return await axios.get(`${API_URL}/dropdown/getEmployeeDropdown?type=${type}&parent=${parent}`);
 };
+
 
 /* ADD */
 export const addEmployeeDropdown = async (data) => {
@@ -486,4 +490,16 @@ export const markAsReadNotifications=async(data)=>{
 
 export const updateMilkingRecord=async(data)=>{
   return await axios.post(`${API_URL}/updateMilkingRecord`,data)
+}
+
+export const animalUpdate=async(data)=>{
+  return await axios.post(`${API_URL}/animalUpdate`,data);
+}
+
+export const getAnimalById = async (animal_id) => {
+  return await axios.post(`${API_URL}/getAnimalById`, { animal_id });
+};
+
+export const getMedicineStats=async()=>{
+  return await axios.get(`${API_URL}/medicine/stats`);
 }

@@ -1,5 +1,5 @@
 import React, { useState,useContext } from "react";
-import { Box, CssBaseline, AppBar, Toolbar, IconButton, Typography,Badge } from "@mui/material";
+import { Box, CssBaseline, AppBar, Toolbar, IconButton, Button,Typography,Badge ,Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useNavigate } from "react-router-dom";
@@ -7,10 +7,14 @@ import { NotificationContext } from "../context/NotificationContext";
 
 import SideNav from "./SideNav";
 import { Outlet } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
+
 
 
 const Layout = () => {
+  const { setNotifications } = useContext(NotificationContext);
   const [open, setOpen] = useState(true); // Start as open
+  const[logoutDialog,setLogoutDialog]=useState(false);
   const drawerWidth = 280;
   const collapsedWidth = 60;
   const navigate = useNavigate();
@@ -18,6 +22,21 @@ const Layout = () => {
 
   const toggleDrawer = () => setOpen(!open);
   const { unreadCount } = useContext(NotificationContext);
+
+
+  const handleLogoutClick=()=>{
+    setLogoutDialog(true);
+  }
+  const handleCloseDialog=()=>{
+    setLogoutDialog(false);
+  }
+   
+  
+   const confirmLogout = () => {
+    setNotifications([]);
+    localStorage.clear();
+    navigate("/login");
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -54,6 +73,9 @@ const Layout = () => {
 </Badge>
 
 </IconButton>
+ <IconButton color="inherit" onClick={handleLogoutClick}>
+            <LogoutIcon />
+          </IconButton>
 
 
         </Toolbar>
@@ -74,6 +96,54 @@ const Layout = () => {
       >
         <Outlet />
       </Box>
+       {/* Logout Confirmation Dialog */}
+      <Dialog
+        open={logoutDialog}
+        onClose={handleCloseDialog}
+        PaperProps={{
+          sx: {
+            borderRadius: "16px",
+            padding: "10px"
+          }
+        }}
+      >
+        <DialogTitle sx={{ fontWeight: "bold" }}>
+          Confirm Logout
+        </DialogTitle>
+
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to logout?
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions sx={{ padding: "16px" }}>
+          <Button
+            onClick={handleCloseDialog}
+            variant="outlined"
+  sx={{
+    backgroundColor: "#fff",
+    color: "rgb(30, 5, 5)",
+    borderColor: "rgb(30, 5, 5)",
+    "&:hover": {
+      backgroundColor: "#f0f0f0",
+      borderColor: "rgb(30, 5, 5)"
+    }
+  }}          >
+            Cancel
+          </Button>
+
+          <Button
+            onClick={confirmLogout}
+            variant="contained"
+            color="error"
+            sx={{backgroundColor: "rgb(42, 8, 11)", "&:hover": { backgroundColor: "rgb(30, 5, 5)" }}}
+          >
+            Logout
+          </Button>
+        </DialogActions>
+      </Dialog>
+    
     </Box>
   );
 };

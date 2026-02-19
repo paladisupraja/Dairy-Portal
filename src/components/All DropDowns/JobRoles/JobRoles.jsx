@@ -216,8 +216,9 @@ const JobRoles = () => {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setAddOpen(false)}>Cancel</Button>
-          <Button variant="contained" onClick={handleAdd} disabled={adding}>
+          <Button onClick={() => setAddOpen(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
+          <Button variant="contained" onClick={handleAdd} disabled={adding} sx={{ backgroundColor: "rgb(42, 8, 11)",
+            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },}}>
             {adding ? <CircularProgress size={20} /> : "Add"}
           </Button>
         </DialogActions>

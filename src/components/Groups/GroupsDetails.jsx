@@ -74,7 +74,7 @@ const handleBack=()=>{
   }
 
   return (
-    <Box sx={{ p: 3, backgroundColor: "#f4f6f8", minHeight: "100vh" }}>
+    <Box sx={{ p: 0, minHeight: "100vh" }}>
       
       {/* BACK BUTTON */}
       

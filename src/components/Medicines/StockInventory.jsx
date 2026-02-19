@@ -73,12 +73,12 @@ const StockInventory = () => {
 
   return (
     <Box sx={{ padding: 4 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography  variant="h5" fontWeight={600}>
         Stock Inventory
       </Typography>
 
       {/* Filters */}
-      <Box sx={{ display: "flex", gap: 2, mb: 3, flexWrap: "wrap" }}>
+      <Box sx={{ display: "flex", gap: 2, mb: 3, mt:1,flexWrap: "wrap" }}>
         <FormControl sx={{ minWidth: 180 }}>
           <InputLabel>Category</InputLabel>
           <Select
@@ -134,7 +134,7 @@ const StockInventory = () => {
         <Typography sx={{ mt: 4 }}>No medicines found</Typography>
       ) : (
         <TableContainer component={Paper} sx={{ borderRadius: 2 }}>
-          <Table>
+          <Table size="small">
             <TableHead>
               <TableRow>
                 {["Name", "Category", "Qty", "Unit", "Price", "Expiry", "Status"].map((head) => (

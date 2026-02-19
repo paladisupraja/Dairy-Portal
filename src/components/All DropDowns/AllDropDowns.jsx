@@ -56,7 +56,7 @@ const AllDropDowns = () => {
               padding: "12px 0",
               minWidth: "auto",
             },
-            "& .Mui-selected": {
+           "& .MuiTab-root.Mui-selected": {
               color: "rgb(42,8,11)",
               fontWeight: 600,
             },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getAllAnimals } from "../services";
-import { useSnackbar } from "../context/SnackbarContext";
+import { getAllAnimals } from "../../services";
+import { useSnackbar } from "../../context/SnackbarContext";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import {
@@ -73,7 +73,7 @@ const fetchAnimals = async () => {
 };
 
   return (
-    <Box p={3}>
+    <Box p={0}>
       <Card>
         <CardContent>
           {/* Header */}

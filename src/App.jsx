@@ -1,12 +1,12 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import UserLogin from "./components/UserLogin";
 import UserSignup from "./components/UserSignup";
-import EmployeeList from "./components/EmployeeList";
-import UpdateEmployee from "./components/UpdateEmployee";
+import EmployeeList from "./components/Employees/EmployeeList";
+import UpdateEmployee from "./components/Employees/UpdateEmployee";
 import Layout from "./components/Layout";
-import AddEmployee from "./components/AddEmployee";
-import AnimalList from "./components/AnimalList";
-import AddAnimal from "./components/AddAnimal";
+import AddEmployee from "./components/Employees/AddEmployee";
+import AnimalList from "./components/Animals/AnimalList";
+import AddAnimal from "./components/Animals/AddAnimal";
 import Pastures from "./components/Pastures/Pastures";
 import AddPasture from "./components/Pastures/AddPasture";
 import Medicine from "./components/Medicines/Medicine";
@@ -36,6 +36,9 @@ import CowReports from "./components/Dashboard/CowReports";
 import Counts from "./components/Dashboard/Counts";
 import BuffaloReports from "./components/Dashboard/BuffaloReports";
 import Notifications from "./components/Notifications/Notifications";
+import AddVaccine from "./components/Animals/AddVaccine";
+import AddMedicine from "./components/Animals/AddMedicine";
+import AnimalEditForm from "./components/Animals/AnimalEditForm";
 
 function App() {
   return (
@@ -73,6 +76,11 @@ function App() {
 <Route path="/cattlecount" element={<CattleCount />}/>
 <Route path="/cowreports" element={<CowReports/>}/>
 <Route path="/buffaloreports" element={<BuffaloReports/>}/>
+<Route path="/add-vaccine/:animalId" element={<AddVaccine />} />
+<Route path="/add-medicine" element={<AddMedicine />} />
+<Route path="/edit-animal-form" element={<AnimalEditForm />} />
+
+
 
 <Route path="/alldropdowns" element={<AllDropDowns />}/>
 <Route path="/notifications" element={<Notifications/>}/>

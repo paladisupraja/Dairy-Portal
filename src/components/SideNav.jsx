@@ -26,15 +26,15 @@ const drawerWidth = 280;
 const collapsedWidth = 60;
 
 const allMenuItems = [
-  { text: "Employees", icon: <PersonIcon />, path: "/employees" },
-  { text: "Animals", icon: <PetsIcon />, path: "/animals" },
-  { text: "Grouping", icon: <GroupsIcon />, path: "/grouping" },
-  { text: "Pastures", icon: <ForestIcon />, path: "/pastures" },
-  { text: "Milk Records", icon: <ReceiptIcon />, path: "/milking" },
-  { text: "Milk Reports", icon: <BarChartIcon />, path: "/milkreports" },
-  { text: "All Dropdowns", icon: <NotificationsIcon />, path: "/alldropdowns" },
-  { text: "Fodder Management", icon: <GrassIcon />, path: "/fodder" },
-  { text: "Medicine Management", icon: <MedicalServicesIcon />, path: "/medicines" },
+  { text: "Employees", icon: <PersonIcon />, path: "/employees", highlightPaths: ["/employees", "/add-employee", "/update-employee"] },
+  { text: "Animals", icon: <PetsIcon />, path: "/animals", highlightPaths: ["/animals", "/add-animal", "/update-animal","/edit-animal-form"] },
+  { text: "Grouping", icon: <GroupsIcon />, path: "/grouping", highlightPaths: ["/grouping"] },
+  { text: "Pastures", icon: <ForestIcon />, path: "/pastures", highlightPaths: ["/pastures"] },
+  { text: "Milk Records", icon: <ReceiptIcon />, path: "/milking", highlightPaths: ["/milking", "/add-milk"] },
+  { text: "Milk Reports", icon: <BarChartIcon />, path: "/milkreports", highlightPaths: ["/milkreports"] },
+  { text: "All Dropdowns", icon: <NotificationsIcon />, path: "/alldropdowns", highlightPaths: ["/alldropdowns"] },
+  { text: "Fodder Management", icon: <GrassIcon />, path: "/fodder", highlightPaths: ["/fodder"] },
+  { text: "Medicine Management", icon: <MedicalServicesIcon />, path: "/medicines", highlightPaths: ["/medicines"] },
 ];
 
 const SideNav = ({ open }) => {
@@ -42,8 +42,15 @@ const SideNav = ({ open }) => {
   const location = useLocation();
 
   // Get user role from localStorage
-  const user = JSON.parse(localStorage.getItem("user"));
-  const isEmployee = user.role === "employee";
+  const storedUser = localStorage.getItem("user");
+  const user = storedUser ? JSON.parse(storedUser) : null;
+
+  // ✅ Safe values
+  const role = user?.role || "";
+  const userName = user?.user_name || "";
+
+  // ✅ Role check
+  const isEmployee = role === "employee";
 
   // Filter menu items based on role
   const menuItems = isEmployee
@@ -78,7 +85,10 @@ const SideNav = ({ open }) => {
         }}
       >
         {open ? (
-          <Typography variant="h6">Dhenusya Farm</Typography>
+         <Box>
+            <Typography variant="h6">Dhenusya Farm</Typography>
+           
+          </Box>
         ) : (
           <Typography
             variant="h6"
@@ -88,19 +98,44 @@ const SideNav = ({ open }) => {
           </Typography>
         )}
       </Box>
+<Box sx={{ px: 2, py: 1 }}>
+  <Typography variant="body2" sx={{ fontWeight: 600 }}>
+    Name :
+    <span style={{ fontWeight: 400, marginLeft: 6 }}>
+      {userName} ({role})
+    </span>
+  </Typography>
+</Box>
 
+             
       {/* Menu */}
       <List>
         {menuItems.map((item, index) => (
           <Tooltip key={index} title={open ? "" : item.text} placement="right">
-            <ListItemButton
-              selected={location.pathname === item.path}
-              onClick={() => navigate(item.path)}
-              sx={{
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
+         <ListItemButton
+  selected={item.highlightPaths.some(p => location.pathname.startsWith(p))}
+  onClick={() => navigate(item.path)}
+  sx={{
+    justifyContent: open ? "initial" : "center",
+    px: 2.5,
+    // Custom selected background
+    "&.Mui-selected": {
+      bgcolor: "rgba(42, 8, 11, 0.15)", // light shade for selected
+      "&:hover": {
+        bgcolor: "rgba(42, 8, 11, 0.2)", // slightly darker on hover
+      },
+    },
+    "&:hover": {
+      bgcolor: item.highlightPaths.some(p =>
+        location.pathname.startsWith(p)
+      )
+        ? "rgba(42, 8, 11, 0.2)" // keep hover darker for selected
+        : "rgba(0,0,0,0.04)", // default hover for unselected
+    },
+  }}
+>
+
+
               <ListItemIcon
                 sx={{
                   minWidth: 0,

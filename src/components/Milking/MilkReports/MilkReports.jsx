@@ -170,7 +170,7 @@ const MilkReports = () => {
   /* ---------- UI ---------- */
 
   return (
-    <Box p={3} sx={{ minHeight: "100vh" }}>
+    <Box p={0} sx={{ minHeight: "100vh" }}>
       <Typography variant="h6" fontWeight={700} mb={3}>
         🥛 Milk Reports
       </Typography>

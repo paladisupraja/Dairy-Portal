@@ -4,8 +4,8 @@ import {
   getAllGenders,
   getEmployeeDropdown,
   getAllPastures,
-} from "../services";
-import { useSnackbar } from "../context/SnackbarContext";
+} from "../../services";
+import { useSnackbar } from "../../context/SnackbarContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import {
