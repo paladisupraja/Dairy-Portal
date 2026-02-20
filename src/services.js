@@ -503,3 +503,7 @@ export const getAnimalById = async (animal_id) => {
 export const getMedicineStats=async()=>{
   return await axios.get(`${API_URL}/medicine/stats`);
 }
+
+export const getPastureDetailsById=async(pastureId)=>{
+  return await axios.get(`${API_URL}/getPastureWithDetails?pastureId=${pastureId}`)
+}
