@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <AnimalDropdownProvider>
         <EmployeeProvider>
         <NotificationProvider>
-      <BrowserRouter basename="/Dairy-Portal">
+      <BrowserRouter >
               <App />
             </BrowserRouter>
       </NotificationProvider></EmployeeProvider>
