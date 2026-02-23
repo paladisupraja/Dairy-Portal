@@ -10,6 +10,7 @@ import {
   Button,
   Typography,
 } from "@mui/material";
+import "../index.css";
 
 const UserSignup=()=>{
   const navigate=useNavigate();
@@ -75,10 +76,10 @@ const UserSignup=()=>{
                 <TextField fullWidth label="Email" required value={email_id}  margin="normal" onChange={(e)=>setEmail(e.target.value)} placeholder='Enter Email'/>
                 <TextField fullWidth label="password" required value={password} margin="normal" onChange={(e)=>setPassword(e.target.value)} placeholder="Enter Password"/>
                 
-               <Button fullWidth variant="contained" sx={{mt:2,backgroundColor:"rgb(42, 8, 11)", "&:hover": { backgroundColor: "rgb(30, 5, 5)" }}} onClick={handleSignup}>Register</Button>
+               <Button fullWidth variant="contained" sx={{mt:2}} className="bg-color" onClick={handleSignup}>Register</Button>
                
 <Typography align="center" sx={{ mt: 2 }}>
-  Already have an account? <Link to="/login" style={{color:"rgb(42,8,11)"}}>Login</Link>
+  Already have an account? <Link to="/login" className="color">Login</Link>
 </Typography>
             </CardContent>
 

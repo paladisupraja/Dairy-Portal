@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { NotificationContext } from "../context/NotificationContext";
 
 import { Box, Card, CardContent, TextField, Button, Typography } from "@mui/material";
+import "../index.css";
 
 const UserLogin = () => {
   const [mobile_num, setMobileNumber] = useState("");
@@ -71,15 +72,14 @@ const UserLogin = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <Button fullWidth variant="contained" color="primary" sx={{ mt: 2 ,
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
+          <Button fullWidth variant="contained" color="primary" className="bg-color"
+  sx={{ mt: 2 
   }} onClick={handleLogin}>
             Login
           </Button>
 
           <Typography align="center" sx={{ mt: 2 }}>
-            Don't have an account? <Link to="/signup" style={{color:"rgb(42,8,11)"}}>Sign Up</Link>
+            Don't have an account? <Link to="/signup" className="color">Sign Up</Link>
           </Typography>
         </CardContent>
       </Card>
