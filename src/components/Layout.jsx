@@ -122,10 +122,11 @@ const Layout = () => {
           <Button
             onClick={handleCloseDialog}
             variant="outlined"
+            className="color"
   sx={{
     backgroundColor: "#fff",
     color: "rgb(30, 5, 5)",
-    borderColor: "rgb(30, 5, 5)",
+    borderColor: "navy",
     "&:hover": {
       backgroundColor: "#f0f0f0",
       borderColor: "rgb(30, 5, 5)"
@@ -138,7 +139,7 @@ const Layout = () => {
             onClick={confirmLogout}
             variant="contained"
             color="error"
-            sx={{backgroundColor: "rgb(42, 8, 11)", "&:hover": { backgroundColor: "rgb(30, 5, 5)" }}}
+            className="bg-color"
           >
             Logout
           </Button>
