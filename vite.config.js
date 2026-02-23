@@ -14,7 +14,7 @@ export default defineConfig({
   base: "/Dairy-Portal/", // important for GitHub Pages
   server: {
     proxy: {
-      '/prod': 'http://20.244.40.188', // for development only
+      '/prod': 'http://20.244.40.188/prod', // for development only
     },
   },
 })
