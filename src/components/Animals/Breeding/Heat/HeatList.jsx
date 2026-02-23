@@ -21,7 +21,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useParams } from "react-router-dom";
 import { getHeatRecordsByAnimalTag, addHeatRecord, getEmployees, deleteHeatRecord } from "../../../../services";
-
+import "../../../../index.css"
 // Predefined time slots
 const TIME_OPTIONS = [
   "6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM",
@@ -116,10 +116,7 @@ const HeatList = () => {
         <CardContent>
           <Box display="flex" justifyContent="space-between" alignItems="center">
             <Typography variant="h6">Heat Records</Typography>
-            <Button variant="contained" onClick={() => setOpen(true)} sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>Add Heat</Button>
+            <Button variant="contained" onClick={() => setOpen(true)} className="bg-color">Add Heat</Button>
           </Box>
 
           <Typography mt={1}>
@@ -263,11 +260,8 @@ const HeatList = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpen(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" onClick={handleSubmit}sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>Save</Button>
+          <Button onClick={() => setOpen(false)} className="color">Cancel</Button>
+          <Button variant="contained" onClick={handleSubmit} className="bg-color">Save</Button>
         </DialogActions>
       </Dialog>
     </>

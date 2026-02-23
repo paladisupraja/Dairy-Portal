@@ -3,6 +3,7 @@ import { getAllAnimals } from "../../services";
 import { useSnackbar } from "../../context/SnackbarContext";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import "../../index.css";
 import {
   Box,
   Card,
@@ -87,10 +88,7 @@ const fetchAnimals = async () => {
             </Button> */}
             <Button
   variant="contained"
-   sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}
+   className="bg-color"
   onClick={() =>
     navigate("/animals/add", {
       state: isEmployee ? { farm_id: user.farm_id } : {},
@@ -136,10 +134,7 @@ const fetchAnimals = async () => {
                     <TableCell>{animal.lifecycle}</TableCell>
                     <TableCell align="center">
                        <IconButton
-                         sx={{
-   color: "rgb(42, 8, 11)"// Correct way to style MUI Button
-   
-  }}
+                         className="color"
                         onClick={() =>
   navigate(`/animals/edit/${animal.tag_no}`, {
     state: { animalId: animal.animal_id }, // ✅ send animalId here

@@ -128,15 +128,12 @@ const tagNo = location.state?.tagNo;  // TAG NUMBER
         </Box>
 
         <Box mt={3} display="flex" justifyContent="space-between">
-          <Button onClick={handleSkip} sx={{color:"rgb(42,8,11)"}}>Skip</Button>
+          <Button onClick={handleSkip} className="color">Skip</Button>
 
           <Button
             variant="contained"
             onClick={handleSave}
-            sx={{
-              backgroundColor: "rgb(42, 8, 11)",
-              "&:hover": { backgroundColor: "rgb(30, 5, 5)" }
-            }}
+            className="bg-color"
           >
             Save Vaccine
           </Button>

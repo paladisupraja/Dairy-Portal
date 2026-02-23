@@ -13,6 +13,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EditIcon from "@mui/icons-material/Edit";
 
 import AnimalTabs from "./AnimalTabs";
+import "../../index.css";
 
 const AnimalEdit = () => {
 
@@ -49,10 +50,11 @@ const AnimalEdit = () => {
       <Button
               startIcon={<ArrowBackIcon />}
               onClick={handleBack}
+              className="color"
               sx={{
                 textTransform: "none",
                 fontWeight: 500,
-                color: "#2A080B",
+               
               }}
             >
               Back
@@ -69,7 +71,7 @@ const AnimalEdit = () => {
             Edit Animal – Tag No: <b>{tagNo}</b>
           </Typography>
 
-          <IconButton onClick={handleEditClick} sx={{color:"rgb(42,8,11)"}}>
+          <IconButton onClick={handleEditClick} className="color">
             <EditIcon />
           </IconButton>
 

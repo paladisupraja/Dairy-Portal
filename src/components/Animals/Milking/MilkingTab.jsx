@@ -15,6 +15,7 @@ import {
   Button,
 } from "@mui/material";
 import { getMilkingDataByAnimalTagNo } from "../../../services";
+import "../../../index.css";
 
 const MilkingTab = () => {
   const { tagNo } = useParams(); // get tagNo from URL
@@ -64,10 +65,7 @@ const MilkingTab = () => {
             onChange={(e) => setEndDate(e.target.value)}
             InputLabelProps={{ shrink: true }}
           />
-          <Button variant="contained" onClick={fetchMilkingData} sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>
+          <Button variant="contained" onClick={fetchMilkingData} className="bg-color">
             Fetch
           </Button>
         </Box>

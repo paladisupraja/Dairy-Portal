@@ -24,6 +24,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 import { useSnackbar } from "../../context/SnackbarContext";
 import { getFodderData } from "../../services";
+import "../../index.css";
 
 const Stock = () => {
   const { showSnackbar } = useSnackbar();
@@ -96,8 +97,7 @@ const Stock = () => {
         </Box>
 
         <Button
-          variant="contained" sx={{ backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },}}
+          variant="contained" className="bg-color"
           startIcon={<AddIcon />}
           onClick={() => setOpenAddStock(true)}
         >
@@ -256,9 +256,8 @@ const Stock = () => {
         </DialogContent>
 
         <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button onClick={() => setOpenAddStock(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" onClick={handleAddStock} sx={{ backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },}}>
+          <Button onClick={() => setOpenAddStock(false)} className="color">Cancel</Button>
+          <Button variant="contained" onClick={handleAddStock} className="bg-color">
             Save
           </Button>
         </DialogActions>

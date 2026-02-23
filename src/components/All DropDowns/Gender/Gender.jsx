@@ -21,6 +21,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getAllGenders, addGender, deleteGender } from "../../../services";
 import { useSnackbar } from "../../../context/SnackbarContext";
+import "../../../index.css";
 
 const Gender = () => {
   const { showSnackbar } = useSnackbar();
@@ -99,10 +100,7 @@ const Gender = () => {
       {/* Header */}
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
         <Typography variant="h5">Gender Details</Typography>
-        <Button variant="contained" sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}  onClick={() => setAddDialogOpen(true)}>
+        <Button variant="contained" className="bg-color" onClick={() => setAddDialogOpen(true)}>
           Add Gender
         </Button>
       </Box>
@@ -182,11 +180,8 @@ const Gender = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setAddDialogOpen(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}  onClick={handleAdd} disabled={adding}>
+          <Button onClick={() => setAddDialogOpen(false)} className="color">Cancel</Button>
+          <Button variant="contained" className="bg-color" onClick={handleAdd} disabled={adding}>
             {adding ? <CircularProgress size={20} /> : "Add"}
           </Button>
         </DialogActions>

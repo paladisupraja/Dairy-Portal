@@ -17,6 +17,7 @@ import {
   Typography,
   MenuItem,
 } from "@mui/material";
+import "../../index.css";
 
 const UpdateEmployee = () => {
   const { showSnackbar } = useSnackbar();
@@ -191,10 +192,11 @@ const UpdateEmployee = () => {
             <Button
               startIcon={<ArrowBackIcon />}
               onClick={handleBack}
+              className="color"
               sx={{
                 textTransform: "none",
                 fontWeight: 500,
-                color: "#2A080B",
+               
               }}
             >
               Back
@@ -292,10 +294,7 @@ const UpdateEmployee = () => {
             <TextField {...commonFieldProps} label="Address" name="address" value={formData.address || ""} onChange={handleChange} sx={{ flex: "1 1 100%" }} />
           </Box>
 
-          <Button variant="contained" fullWidth sx={{ mt: 3, height: 48,
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }} onClick={handleSubmit}>
+          <Button variant="contained" fullWidth  className="bg-color" sx={{ mt: 3, height: 48 }} onClick={handleSubmit}>
             UPDATE EMPLOYEE
           </Button>
         </CardContent>

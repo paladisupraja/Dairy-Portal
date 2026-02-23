@@ -6,6 +6,7 @@ import HealthTab from "./HealthTab";
 import MilkingTab from "./Milking/MilkingTab";
 import TimeLine from "./Timeline/TimeLine";
 import CalfTags from "./Calf/CalfTags";
+import "../../index.css";
 
 const AnimalTabs = ({ tagNo, animalId }) => { // ✅ get animalId from props
   const [tab, setTab] = useState(0);

@@ -13,6 +13,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSnackbar } from "../../context/SnackbarContext";
 import { addEmployee } from "../../services";
 import { EmployeeContext } from "../../context/EmployeeContext";
+import "../../index.css";
 
 /* ================= DEFAULT PAYLOAD ================= */
 const DEFAULT_PAYLOAD = {
@@ -158,7 +159,7 @@ const AddEmployee = () => {
         <CardContent>
           {/* HEADER */}
           <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: 3 }}>
-            <Button startIcon={<ArrowBackIcon />} onClick={handleBack} sx={{ textTransform: "none", fontWeight: 500, color: "rgb(42,8,11)" }}>
+            <Button startIcon={<ArrowBackIcon />} onClick={handleBack} className="color" sx={{ textTransform: "none", fontWeight: 500 }}>
               Back
             </Button>
             <Typography variant="h5" fontWeight={600}>Add Employee</Typography>
@@ -201,7 +202,7 @@ const AddEmployee = () => {
             <TextField {...commonProps} label="Password" type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Enter Password" />
           </Box>
 
-          <Button fullWidth variant="contained" sx={{ mt: 4, backgroundColor: "rgb(42,8,11)", "&:hover": { backgroundColor: "rgb(30,5,5)" } }} onClick={handleSubmit} disabled={loading}>
+          <Button fullWidth variant="contained" className="bg-color" sx={{ mt: 4 }} onClick={handleSubmit} disabled={loading}>
             {loading ? "ADDING..." : "ADD EMPLOYEE"}
           </Button>
         </CardContent>

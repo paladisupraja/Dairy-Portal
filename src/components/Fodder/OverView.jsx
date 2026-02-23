@@ -21,6 +21,7 @@ import CategoryIcon from "@mui/icons-material/Category";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import GrassIcon from "@mui/icons-material/Grass";
 import NatureIcon from "@mui/icons-material/Nature";
+import "../../index.css"
 
 import {
   getConsumptionStats,
@@ -184,10 +185,7 @@ const OverView = () => {
         <Box display="flex" gap={1.5}>
           <Button
             variant="contained"
-            sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}
+            className="bg-color"
             startIcon={<AddIcon />}
             onClick={() => setOpenAddStock(true)}
           >
@@ -196,11 +194,7 @@ const OverView = () => {
 
           <Button
             variant="outlined"
-            sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            color:"white"
-           
-          }}
+            className="bg-color"
             startIcon={<CategoryIcon />}
             onClick={() => setOpenAddType(true)}
           >
@@ -326,11 +320,8 @@ const OverView = () => {
         </DialogContent>
 
         <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button onClick={() => setOpenAddStock(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" onClick={handleAddStock} sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}>
+          <Button onClick={() => setOpenAddStock(false)} className="color">Cancel</Button>
+          <Button variant="contained" onClick={handleAddStock}className="bg-color">
             Save
           </Button>
         </DialogActions>
@@ -351,11 +342,8 @@ const OverView = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpenAddType(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" onClick={handleAddType} sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}>
+          <Button onClick={() => setOpenAddType(false)} className="color">Cancel</Button>
+          <Button variant="contained" onClick={handleAddType} className="bg-color">
             Save
           </Button>
         </DialogActions>

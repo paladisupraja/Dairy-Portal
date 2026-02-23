@@ -8,6 +8,7 @@ import { NotificationContext } from "../context/NotificationContext";
 import SideNav from "./SideNav";
 import { Outlet } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
+import "../index.css";
 
 
 
@@ -45,9 +46,9 @@ const Layout = () => {
       {/* AppBar */}
       <AppBar
         position="fixed"
+        className="bg-color"
         sx={{
-          bgcolor: "rgb(42, 8, 11)",
-          color: "#fff",
+         
           width: `calc(100% - ${open ? drawerWidth : collapsedWidth}px)`,
           ml: `${open ? drawerWidth : collapsedWidth}px`,
           transition: "0.3s",

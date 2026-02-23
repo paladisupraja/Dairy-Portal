@@ -30,6 +30,7 @@ import {
   getVendors,
   getUnits,
 } from "../../services";
+import "../../index.css";
 
 /* ✅ Fixed Medicine Names */
 
@@ -202,7 +203,7 @@ const InputInventory = () => {
         <Typography variant="h5" fontWeight={600}>
           Inventory Management
         </Typography>
-        <IconButton sx={{ color: "rgb(42,8,11)" }} onClick={() => setOpenAdd(true)}>
+        <IconButton className="color" onClick={() => setOpenAdd(true)}>
           <AddIcon />
         </IconButton>
       </Box>
@@ -429,16 +430,13 @@ const InputInventory = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpenAdd(false)} sx={{ color: "rgb(42,8,11)" }}>
+          <Button onClick={() => setOpenAdd(false)} className="color">
             Cancel
           </Button>
           <Button
             variant="contained"
             onClick={handleAddMedicine}
-            sx={{
-              backgroundColor: "rgb(42, 8, 11)",
-              "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-            }}
+           className="bg-color"
           >
             Add
           </Button>

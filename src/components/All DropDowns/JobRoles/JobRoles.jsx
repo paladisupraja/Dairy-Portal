@@ -20,6 +20,7 @@ import {
   Stack,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import "../../../index.css";
 
 import {
   getEmployeeDropdown,
@@ -106,10 +107,7 @@ const JobRoles = () => {
       {/* Header */}
       <Box display="flex" justifyContent="space-between" mb={2}>
         <Typography variant="h5">Employees Roles</Typography>
-        <Button variant="contained"  sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}onClick={() => setAddOpen(true)}>
+        <Button variant="contained"  className="bg-color" onClick={() => setAddOpen(true)}>
           Add
         </Button>
       </Box>
@@ -216,9 +214,8 @@ const JobRoles = () => {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setAddOpen(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" onClick={handleAdd} disabled={adding} sx={{ backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },}}>
+          <Button className="color" onClick={() => setAddOpen(false)}>Cancel</Button>
+          <Button variant="contained" onClick={handleAdd} disabled={adding} className="bg-color">
             {adding ? <CircularProgress size={20} /> : "Add"}
           </Button>
         </DialogActions>

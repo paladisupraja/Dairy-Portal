@@ -39,6 +39,7 @@ import Notifications from "./components/Notifications/Notifications";
 import AddVaccine from "./components/Animals/AddVaccine";
 import AddMedicine from "./components/Animals/AddMedicine";
 import AnimalEditForm from "./components/Animals/AnimalEditForm";
+import Schedulers from "./components/All DropDowns/Notifications/Schedulers";
 
 function App() {
   return (
@@ -84,6 +85,7 @@ function App() {
 
 <Route path="/alldropdowns" element={<AllDropDowns />}/>
 <Route path="/notifications" element={<Notifications/>}/>
+<Route path="/schedulers" element={<Schedulers/>}/>
 <Route path="/fodder" element={<FodderList />}/>
         <Route path="/animals/heat/:tagNo" element={<HealthTab />} />
         <Route path="pastures" element={<Pastures />}/>

@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { useSnackbar } from "../../context/SnackbarContext";
 import { getAllAnimals, addAnimalsToGroup } from "../../services";
+import "../../index.css";
 
 const AddAnimalDialog = ({ open, onClose, groupId, groupAnimals, onSuccess, farmId }) => {
   const { showSnackbar } = useSnackbar();
@@ -115,6 +116,7 @@ const AddAnimalDialog = ({ open, onClose, groupId, groupAnimals, onSuccess, farm
                       <Checkbox
                         checked={isChecked }
                         onChange={() => toggleSelect(animalId)}
+                        // className="bg-color"
                          sx={{
     color: "rgb(42, 8, 11)", // unchecked color
     "&.Mui-checked": {
@@ -134,11 +136,8 @@ const AddAnimalDialog = ({ open, onClose, groupId, groupAnimals, onSuccess, farm
         )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-        <Button variant="contained" onClick={handleSubmit}  sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>Save</Button>
+        <Button onClick={onClose}className="color">Cancel</Button>
+        <Button variant="contained" onClick={handleSubmit}className="bg-color">Save</Button>
       </DialogActions>
     </Dialog>
   );

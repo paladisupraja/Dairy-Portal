@@ -26,6 +26,7 @@ import {
   deleteAnimalBreed,
 } from "../../../services";
 import { useSnackbar } from "../../../context/SnackbarContext";
+import "../../../index.css";
 
 const AnimalBreed = () => {
   const { showSnackbar } = useSnackbar();
@@ -114,10 +115,7 @@ const AnimalBreed = () => {
         <Stack direction="row" spacing={2}>
           {["Buffalo", "Cow"].map((type) => (
             <Button
-              sx={{
-    backgroundColor: "rgb(42, 8, 11)",color:"white", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }} 
+           className="bg-color"
               key={type}
               variant={animalType === type ? "contained" : "outlined"}
               onClick={() => setAnimalType(type)}
@@ -128,10 +126,7 @@ const AnimalBreed = () => {
         </Stack>
 
         {/* Add Button */}
-        <Button variant="contained"sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}  onClick={() => setAddOpen(true)}>
+        <Button variant="contained" className="bg-color" onClick={() => setAddOpen(true)}>
           Add Breed
         </Button>
       </Box>
@@ -223,11 +218,8 @@ const AnimalBreed = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setAddOpen(false)} sx={{color:"rgb(42, 8, 11)"}}>Cancel</Button>
-          <Button variant="contained" onClick={handleAddBreed} disabled={adding} sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }} >
+          <Button onClick={() => setAddOpen(false)} className="color">Cancel</Button>
+          <Button variant="contained" onClick={handleAddBreed} disabled={adding} className="bg-color">
             {adding ? <CircularProgress size={20} /> : "Add"}
           </Button>
         </DialogActions>

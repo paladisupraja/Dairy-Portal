@@ -28,7 +28,9 @@ import {
   getAllMedicines,
   getEmployees,
 } from "../../services";
+
 import { useSnackbar } from "../../context/SnackbarContext";
+import "../../index.css";
 
 const OutputInventory = () => {
   const { showSnackbar } = useSnackbar();
@@ -63,10 +65,29 @@ const OutputInventory = () => {
       setLoading(true);
       const res = await getConsumption(tag);
       setData(res.data?.details || res.data || []);
-    } catch (err) {
+    } catch {
       showSnackbar("Failed to load consumption data", "error");
     } finally {
       setLoading(false);
+    }
+  };
+
+  /* ---------------- LOAD DROPDOWNS ---------------- */
+  const loadDropdowns = async () => {
+    try {
+      const aRes = await getAllAnimals();
+      const mRes = await getAllMedicines();
+      const eRes = await getEmployees();
+
+      setAnimals(aRes.data?.data || []);
+      setMedicines(
+        Array.isArray(mRes.data) ? mRes.data : mRes.data?.details || []
+      );
+      setEmployees(
+        Array.isArray(eRes.data) ? eRes.data : eRes.data?.details || []
+      );
+    } catch {
+      showSnackbar("Failed to load dropdown data", "error");
     }
   };
 
@@ -78,51 +99,81 @@ const OutputInventory = () => {
 
   /* ---------------- AUTO SEARCH ---------------- */
   useEffect(() => {
-    const timer = setTimeout(() => {
-      fetchData(animalTag);
-    }, 500);
+    const timer = setTimeout(() => fetchData(animalTag), 500);
     return () => clearTimeout(timer);
   }, [animalTag]);
 
-  /* ---------------- LOAD DROPDOWNS ---------------- */
- const loadDropdowns = async () => {
-  try {
-    const aRes = await getAllAnimals();
-    const mRes = await getAllMedicines();
-    const eRes = await getEmployees();
-
-    // ✅ FIXED HERE
-    setAnimals(aRes.data?.data || []);
-
-    setMedicines(
-      Array.isArray(mRes.data)
-        ? mRes.data
-        : mRes.data?.details || []
-    );
-
-    setEmployees(
-      Array.isArray(eRes.data)
-        ? eRes.data
-        : eRes.data?.details || []
-    );
-  } catch (err) {
-    showSnackbar("Failed to load dropdown data", "error");
-  }
-};
-
-
-  /* ---------------- ADD CONSUMPTION ---------------- */
+  /* ---------------- SUBMIT ---------------- */
   const handleSubmit = async () => {
+    if (
+      !formData.animal_tags.length ||
+      !formData.medicine_id ||
+      !formData.dosage ||
+      !formData.employee_id
+    ) {
+      showSnackbar("Please fill all required fields", "warning");
+      return;
+    }
+
+    if (Number(formData.dosage) <= 0) {
+      showSnackbar("Dosage must be greater than 0", "warning");
+      return;
+    }
+
+    const selectedMedicine = medicines.find(
+      (m) => m.id === Number(formData.medicine_id)
+    );
+
+    if (!selectedMedicine) {
+      showSnackbar("Invalid medicine selected", "error");
+      return;
+    }
+
+    const stock = Number(
+      selectedMedicine.stock || selectedMedicine.quantity || 0
+    );
+
+    if (stock === 0) {
+      showSnackbar("Medicine is out of stock", "error");
+      return;
+    }
+
+    if (Number(formData.dosage) > stock) {
+      showSnackbar(`Not enough stock. Available: ${stock}`, "error");
+      return;
+    }
+
     try {
       await addConsumption(formData);
+
       showSnackbar("Medicine consumption added", "success");
+
       setOpen(false);
       fetchData();
-    } catch (err) {
-      showSnackbar("Failed to add consumption", "error");
+
+      setFormData({
+        animal_tags: [],
+        medicine_id: "",
+        dosage: "",
+        duration: "",
+        time_slot: 1,
+        employee_id: "",
+        supervised_by: "",
+        administered_at: "",
+      });
+    } catch (error) {
+      showSnackbar(
+        error?.response?.data?.message || "Failed to add consumption",
+        "error"
+      );
     }
   };
 
+  const selectedMedicine = medicines.find(
+    (m) => m.id === Number(formData.medicine_id)
+  );
+
+  /* ---------------- UI ---------------- */
   return (
     <Box p={3}>
       {/* HEADER */}
@@ -131,18 +182,20 @@ const OutputInventory = () => {
           Medicine Consumption
         </Typography>
 
-        <IconButton sx={{color:"rgb(42,8,11)"}} onClick={() => setOpen(true)}>
+        <IconButton
+          className="color"
+          onClick={() => setOpen(true)}
+        >
           <AddIcon />
         </IconButton>
       </Box>
 
       {/* SEARCH */}
-      <Card sx={{ mb: 1}}>
+      <Card sx={{ mb: 1 }}>
         <CardContent>
           <TextField
             fullWidth
             label="Search by Animal Tag"
-            placeholder="Type Animal Tag (ex: 601)"
             value={animalTag}
             onChange={(e) => setAnimalTag(e.target.value)}
           />
@@ -161,12 +214,13 @@ const OutputInventory = () => {
               <TableHead>
                 <TableRow>
                   <TableCell><b>Animal Tag</b></TableCell>
-                  <TableCell><b>Medicine ID</b></TableCell>
+                  <TableCell><b>Medicine</b></TableCell>
                   <TableCell><b>Dosage</b></TableCell>
                   <TableCell><b>Duration</b></TableCell>
                   <TableCell><b>Date</b></TableCell>
                 </TableRow>
               </TableHead>
+
               <TableBody>
                 {data.length === 0 ? (
                   <TableRow>
@@ -183,7 +237,9 @@ const OutputInventory = () => {
                       <TableCell>{row.duration}</TableCell>
                       <TableCell>
                         {row.administered_at
-                          ? new Date(row.administered_at).toLocaleDateString()
+                          ? new Date(
+                              row.administered_at
+                            ).toLocaleDateString()
                           : "-"}
                       </TableCell>
                     </TableRow>
@@ -195,7 +251,7 @@ const OutputInventory = () => {
         </CardContent>
       </Card>
 
-      {/* ADD CONSUMPTION DIALOG */}
+      {/* DIALOG */}
       <Dialog open={open} onClose={() => setOpen(false)} fullWidth maxWidth="sm">
         <DialogTitle>Add Medicine Consumption</DialogTitle>
 
@@ -213,12 +269,11 @@ const OutputInventory = () => {
               })
             }
           >
-            {Array.isArray(animals) &&
-              animals.map((a) => (
-                <MenuItem key={a.animal_id} value={a.tag_no}>
-                  {a.tag_no} - {a.animal_type}
-                </MenuItem>
-              ))}
+            {animals.map((a) => (
+              <MenuItem key={a.animal_id} value={a.tag_no}>
+                {a.tag_no} - {a.animal_type}
+              </MenuItem>
+            ))}
           </TextField>
 
           {/* Medicine */}
@@ -227,6 +282,7 @@ const OutputInventory = () => {
             fullWidth
             margin="dense"
             label="Medicine"
+            value={formData.medicine_id}
             onChange={(e) =>
               setFormData({
                 ...formData,
@@ -234,21 +290,43 @@ const OutputInventory = () => {
               })
             }
           >
-            {Array.isArray(medicines) &&
-              medicines.map((m) => (
-                <MenuItem key={m.id} value={m.id}>
-                  {m.name} | {m.category} | Stock: {m.stock}
+            {medicines.map((m) => {
+              const stock = Number(m.stock || m.quantity || 0);
+
+              return (
+                <MenuItem
+                  key={m.id}
+                  value={m.id}
+                  disabled={stock === 0}
+                >
+                  {m.name} | {m.category} | Stock: {stock}
+                  {stock === 0 && " (Out of Stock)"}
                 </MenuItem>
-              ))}
+              );
+            })}
           </TextField>
+
+          {selectedMedicine && (
+            <Typography fontSize={13} color="gray">
+              Available Stock :
+              {selectedMedicine.stock ||
+                selectedMedicine.quantity}
+            </Typography>
+          )}
 
           {/* Dosage */}
           <TextField
             fullWidth
+            type="number"
             margin="dense"
             label="Dosage"
+            inputProps={{ min: 1 }}
+            value={formData.dosage}
             onChange={(e) =>
-              setFormData({ ...formData, dosage: e.target.value })
+              setFormData({
+                ...formData,
+                dosage: e.target.value,
+              })
             }
           />
 
@@ -257,8 +335,12 @@ const OutputInventory = () => {
             fullWidth
             margin="dense"
             label="Duration"
+            value={formData.duration}
             onChange={(e) =>
-              setFormData({ ...formData, duration: e.target.value })
+              setFormData({
+                ...formData,
+                duration: e.target.value,
+              })
             }
           />
 
@@ -268,6 +350,7 @@ const OutputInventory = () => {
             fullWidth
             margin="dense"
             label="Employee"
+            value={formData.employee_id}
             onChange={(e) =>
               setFormData({
                 ...formData,
@@ -275,22 +358,22 @@ const OutputInventory = () => {
               })
             }
           >
-            {Array.isArray(employees) &&
-              employees.map((e) => (
-                <MenuItem
-                  key={e.employee_id}
-                  value={e.employee_id}
-                >
-                  {e.employee_id} - {e.employee_name}
-                </MenuItem>
-              ))}
+            {employees.map((e) => (
+              <MenuItem
+                key={e.employee_id}
+                value={e.employee_id}
+              >
+                {e.employee_name}
+              </MenuItem>
+            ))}
           </TextField>
 
-          {/* Supervised By */}
+          {/* Supervised */}
           <TextField
             fullWidth
             margin="dense"
             label="Supervised By"
+            value={formData.supervised_by}
             onChange={(e) =>
               setFormData({
                 ...formData,
@@ -304,6 +387,7 @@ const OutputInventory = () => {
             fullWidth
             type="datetime-local"
             margin="dense"
+            value={formData.administered_at}
             onChange={(e) =>
               setFormData({
                 ...formData,
@@ -314,9 +398,18 @@ const OutputInventory = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpen(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" sx={{ backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },}}onClick={handleSubmit}>
+          <Button
+            onClick={() => setOpen(false)}
+           className="color"
+          >
+            Cancel
+          </Button>
+
+          <Button
+            variant="contained"
+           className="bg-color"
+            onClick={handleSubmit}
+          >
             Save
           </Button>
         </DialogActions>

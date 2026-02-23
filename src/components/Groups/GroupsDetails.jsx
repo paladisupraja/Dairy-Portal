@@ -26,6 +26,7 @@ import AssignEmployeeDialog from "./AssignEmployeeDialog";
 import { getGroupDetailsById } from "../../services";
 import { useSnackbar } from "../../context/SnackbarContext";
 import AddAnimalDialog from "./AddAnimalDialog";
+import "../../index.css";
 
 const GroupsDetails = () => {
   const { groupId } = useParams();
@@ -81,10 +82,11 @@ const handleBack=()=>{
          <Button
               startIcon={<ArrowBackIcon />}
               onClick={handleBack}
+              className="color"
               sx={{
                 textTransform: "none",
                 fontWeight: 500,
-                color: "#2A080B",
+                
               }}
             >
               Back
@@ -132,9 +134,10 @@ const handleBack=()=>{
     variant="outlined"
     startIcon={<PersonAddIcon />}
     onClick={() => setOpenAssignEmp(true)}
+    className="color"
     sx={{
       color: "rgb(42,8,11)",
-      borderColor: "rgb(42,8,11)",
+      borderColor: "navy",
       textTransform: "none",
       fontWeight: 500,
       borderRadius: "8px",
@@ -152,6 +155,7 @@ const handleBack=()=>{
     variant="contained"
     startIcon={<AddIcon />}
     onClick={() => setOpenAddAnimal(true)}
+    className="bg-color"
     sx={{
       backgroundColor: "rgb(42,8,11)",
       color: "#fff",

@@ -26,6 +26,7 @@ import {
   deleteGroupType,
 } from "../../../services";
 import { useSnackbar } from "../../../context/SnackbarContext";
+import "../../../index.css";
 
 const GroupTypes = () => {
   const { showSnackbar } = useSnackbar();
@@ -98,10 +99,7 @@ const GroupTypes = () => {
       {/* Header */}
       <Box display="flex" justifyContent="space-between" mb={2}>
         <Typography variant="h5">Group Types</Typography>
-        <Button size="small" variant="contained"sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }} onClick={() => setAddOpen(true)}>
+        <Button size="small" variant="contained" className="bg-color" onClick={() => setAddOpen(true)}>
           Add
         </Button>
       </Box>
@@ -176,16 +174,13 @@ const GroupTypes = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button size="small" sx={{color:"rgb(42,8,11)"}}onClick={() => setAddOpen(false)}>
+          <Button size="small" className="color" onClick={() => setAddOpen(false)}>
             Cancel
           </Button>
           <Button
             size="small"
             variant="contained"
-            sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}
+            className="bg-color"
             onClick={handleAdd}
             disabled={adding}
           >

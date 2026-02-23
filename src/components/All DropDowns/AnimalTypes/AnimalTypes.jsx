@@ -5,6 +5,7 @@ import { getAllAnimalTypes, addAnimalType, deleteAnimalType } from "../../../ser
 import AnimalTypeTable from "./AnimalTypeTable";
 import AddAnimalTypeDialog from "./AddAnimalTypeDialog";
 import DeleteConfirmationDialog from "./DeleteConfirmationDialog";
+import "../../../index.css";
 
 const AnimalTypes = () => {
   const { showSnackbar } = useSnackbar();
@@ -82,7 +83,7 @@ const AnimalTypes = () => {
         <Typography variant="h5">Animal Types</Typography>
         <Button
           variant="contained"
-          sx={{ backgroundColor: "rgb(42,8,11)", "&:hover": { backgroundColor: "rgb(30,5,5)" } }}
+          className="bg-color"
           onClick={() => setAddDialogOpen(true)}
         >
           Add New Type

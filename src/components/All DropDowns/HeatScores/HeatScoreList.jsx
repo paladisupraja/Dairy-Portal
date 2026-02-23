@@ -21,6 +21,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import "../../../index.css";
 
 import {
   getheatScoreLists,
@@ -108,10 +109,7 @@ const HeatScoreList = () => {
       {/* Header */}
       <Box display="flex" justifyContent="space-between" mb={2}>
         <Typography variant="h5">Heat Scores</Typography>
-        <Button variant="contained" onClick={() => setOpen(true)} sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}>
+        <Button variant="contained" onClick={() => setOpen(true)} className="bg-color">
           Add Heat Score
         </Button>
       </Box>
@@ -194,7 +192,7 @@ const HeatScoreList = () => {
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button sx={{color:"rgb(42,8,11)"}}
+          <Button className="color"
             onClick={() => {
               setOpen(false);
               resetForm();
@@ -202,10 +200,7 @@ const HeatScoreList = () => {
           >
             Cancel
           </Button>
-          <Button variant="contained" onClick={handleSave} sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}>
+          <Button variant="contained" onClick={handleSave} className="bg-color">
             Add
           </Button>
         </DialogActions>

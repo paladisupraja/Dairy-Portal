@@ -21,6 +21,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import "../../../index.css";
 
 import { getGroups, getMilkingReportByGroup } from "../../../services";
 
@@ -217,7 +218,7 @@ const MilkReports = () => {
 
           return (
             <Accordion key={group.group_id} sx={{ mb: 2, borderRadius: 2 }}>
-              <AccordionSummary sx={{color:"rgb(42,8,11)"}} expandIcon={<ExpandMoreIcon /> }>
+              <AccordionSummary  expandIcon={<ExpandMoreIcon /> }>
                 <Box
                   display="flex"
                   justifyContent="space-between"
@@ -253,7 +254,7 @@ const MilkReports = () => {
     setOpenDialog(true);
   }}
 >
-  <VisibilityIcon sx={{ color: "rgb(42,8,11)" }} />
+  <VisibilityIcon className="color"/>
 </Box>
 
                   </Stack>

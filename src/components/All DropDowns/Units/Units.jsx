@@ -30,6 +30,7 @@ import {
   updateUnit,
   deleteUnit,
 } from "../../../services";
+import "../../../index.css";
 
 const Units = () => {
   const { showSnackbar } = useSnackbar();
@@ -129,10 +130,7 @@ const Units = () => {
       {/* Header */}
       <Stack direction="row" justifyContent="space-between" mb={2}>
         <Typography variant="h5">Units</Typography>
-        <Button variant="contained" sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}onClick={handleOpenAdd}>
+        <Button variant="contained" className="bg-color" onClick={handleOpenAdd}>
           Add Unit
         </Button>
       </Stack>
@@ -169,7 +167,7 @@ const Units = () => {
                     <TableCell sx={{py:1}}>{row.description || "-"}</TableCell>
                     <TableCell align="center" sx={{py:1}}>
                       <IconButton onClick={() => handleEdit(row)}>
-                        <EditIcon sx={{color:"rgb(42,8,11)"}} />
+                        <EditIcon className="color" />
                       </IconButton>
                       <IconButton onClick={() => handleDelete(row.id)}>
                         <DeleteIcon color="error" />
@@ -214,11 +212,8 @@ const Units = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleClose} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" onClick={handleSubmit} sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}>
+          <Button onClick={handleClose} className="color">Cancel</Button>
+          <Button variant="contained" onClick={handleSubmit} className="bg-color">
             {editId ? "Update" : "Save"}
           </Button>
         </DialogActions>

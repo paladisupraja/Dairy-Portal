@@ -28,6 +28,7 @@ import {
 } from "../../../services";
 
 import { useSnackbar } from "../../../context/SnackbarContext";
+import "../../../index.css";
 
 const CalfTags = () => {
   const { tagNo } = useParams();
@@ -167,14 +168,8 @@ const fetchAnimals = async () => {
           </Box>
 
            <Box display="flex" gap={2} alignItems="center">
-            <Chip label={`Total Calves: ${calves.length}`} sx={{
-    backgroundColor: "rgb(42, 8, 11)",color:"white", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }} />
-            <Button variant="contained" size="small" onClick={() => setOpen(true)} sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>
+            <Chip label={`Total Calves: ${calves.length}`} className="bg-color" />
+            <Button variant="contained" size="small" onClick={() => setOpen(true)} className="bg-color">
               Add Calf
             </Button>
           </Box>

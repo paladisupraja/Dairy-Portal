@@ -122,13 +122,13 @@ const FodderList = () => {
 
     /* Selected tab style */
     "& .Mui-selected": {
-      color: "rgb(42,8,11) !important",
+      color: "navy !important",
       fontWeight: 600,
     },
   }}
   TabIndicatorProps={{
     sx: {
-      backgroundColor: "rgb(42,8,11)",
+      backgroundColor: "navy",
       height: 3,
       borderRadius: 2,
     },

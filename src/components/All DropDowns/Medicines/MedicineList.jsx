@@ -21,6 +21,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import "../../../index.css";
 
 import {
   addMedicineList,
@@ -128,10 +129,7 @@ const MedicineList = () => {
       {/* Header */}
       <Box display="flex" justifyContent="space-between" mb={2}>
         <Typography variant="h5">Medicine List</Typography>
-        <Button variant="contained" sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}onClick={() => setOpen(true)}>
+        <Button variant="contained" className="bg-color" onClick={() => setOpen(true)}>
           Add Medicine
         </Button>
       </Box>
@@ -159,7 +157,7 @@ const MedicineList = () => {
                   <TableCell sx={{py:1}}>{row.description || "-"}</TableCell>
                   <TableCell align="center" sx={{py:1}}>
                     <IconButton onClick={() => openEdit(row)}>
-                      <EditIcon sx={{color:"rgb(42,8,11)"}} />
+                      <EditIcon className="color" />
                     </IconButton>
                     <IconButton
                       color="error"
@@ -218,7 +216,7 @@ const MedicineList = () => {
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button sx={{color:"rgb(42,8,11)"}}
+          <Button className="color"
             onClick={() => {
               setOpen(false);
               resetForm();
@@ -226,10 +224,7 @@ const MedicineList = () => {
           >
             Cancel
           </Button>
-          <Button variant="contained" onClick={handleSave} sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}>
+          <Button variant="contained" onClick={handleSave} className="bg-color">
             {isEdit ? "Update" : "Add"}
           </Button>
         </DialogActions>

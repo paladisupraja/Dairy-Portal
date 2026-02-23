@@ -12,6 +12,7 @@ import { useSnackbar } from "../../context/SnackbarContext";
 import { useNavigate } from "react-router-dom";
 import { createPasture } from "../../services";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import "../../index.css";
 
 
 const AddPasture = () => {
@@ -68,10 +69,11 @@ const AddPasture = () => {
        <Button
               startIcon={<ArrowBackIcon />}
               onClick={handleBack}
+              className="color"
               sx={{
                 textTransform: "none",
                 fontWeight: 500,
-                color: "#2A080B",
+                
               }}
             >
               Back
@@ -118,7 +120,7 @@ const AddPasture = () => {
             <Box display="flex" justifyContent="flex-end" gap={2} mt={3}>
               <Button
                
-                onClick={() => navigate("/pastures")} sx={{color:"rgb(42,8,11)"}}
+                onClick={() => navigate("/pastures")} className="color"
               >
                 Cancel
               </Button>
@@ -126,10 +128,7 @@ const AddPasture = () => {
               <Button
                 type="submit"
                 variant="contained"
-                disabled={loading}  sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}
+                disabled={loading}  className="bg-color"
               >
                 {loading ? "Saving..." : "Save"}
               </Button>

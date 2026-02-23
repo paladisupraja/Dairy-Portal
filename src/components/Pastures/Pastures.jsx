@@ -35,6 +35,7 @@ import {
 
 import { useSnackbar } from "../../context/SnackbarContext";
 import { useNavigate } from "react-router-dom";
+import "../../index.css";
 
 const Pastures = () => {
 
@@ -145,10 +146,7 @@ const Pastures = () => {
 
             <Button
               variant="contained"
-              sx={{
-                backgroundColor: "rgb(42,8,11)",
-                "&:hover": { backgroundColor: "rgb(30,5,5)" }
-              }}
+              className="bg-color"
               onClick={() => navigate("/pastures/add")}
             >
               Add Pasture
@@ -189,7 +187,7 @@ const Pastures = () => {
 
                       <IconButton
                         onClick={() => handleEdit(p)}
-                        sx={{ color: "rgb(42,8,11)" }}
+                        className="color"
                       >
                         <EditIcon />
                       </IconButton>
@@ -285,7 +283,7 @@ const Pastures = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpenView(false)} sx={{color:"rgb(42,8,11)"}}>Close</Button>
+          <Button onClick={() => setOpenView(false)} className="color">Close</Button>
         </DialogActions>
       </Dialog>
 
@@ -321,14 +319,11 @@ const Pastures = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpenEdit(false)}>Cancel</Button>
+          <Button onClick={() => setOpenEdit(false)} className="color">Cancel</Button>
           <Button
             variant="contained"
             onClick={handleUpdate}
-            sx={{
-              backgroundColor: "rgb(42,8,11)",
-              "&:hover": { backgroundColor: "rgb(30,5,5)" }
-            }}
+            className="bg-color"
           >
             Update
           </Button>

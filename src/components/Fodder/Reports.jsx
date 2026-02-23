@@ -28,6 +28,7 @@ import {
   getLowStockFodder,
 } from "../../services";
 import { useSnackbar } from "../../context/SnackbarContext";
+import "../../index.css";
 
 const Reports = () => {
   const { showSnackbar } = useSnackbar();
@@ -89,14 +90,12 @@ const Reports = () => {
         onClick={() => setActiveSection(section)}
         sx={{
           fontWeight: 600,
-          backgroundColor: isActive ? "rgb(42, 8, 11)" : "transparent",
-          color: isActive ? "#fff" : "rgb(42, 8, 11)",
-          borderColor: "rgb(42, 8, 11)",
+          backgroundColor: isActive ? "navy" : "transparent",
+          color: isActive ? "#fff" : "navy",
+          borderColor: "navy",
           "&:hover": {
-            backgroundColor: isActive
-              ? "rgb(30, 5, 5)"
-              : "rgba(42, 8, 11, 0.08)",
-            borderColor: "rgb(42, 8, 11)",
+            
+            borderColor: "navy",
           },
         }}
       >
@@ -263,14 +262,12 @@ const Reports = () => {
         variant={isActive ? "contained" : "text"}
         onClick={() => setUsageView(key)}
         sx={{
-          backgroundColor: isActive ? "rgb(42, 8, 11)" : "transparent",
-          color: isActive ? "#fff" : "rgb(42, 8, 11)",
+          backgroundColor: isActive ? "navy" : "transparent",
+          color: isActive ? "#fff" : "navy",
           fontWeight: 600,
           borderRadius: 2,
           "&:hover": {
-            backgroundColor: isActive
-              ? "rgb(30, 5, 5)"
-              : "rgba(42, 8, 11, 0.08)",
+            
           },
         }}
       >

@@ -27,6 +27,7 @@ import {
   getPregnancyList,
 } from "../../../services";
 import { useSnackbar } from "../../../context/SnackbarContext";
+import "../../../index.css";
 
 const PregnancyList = () => {
   const { showSnackbar } = useSnackbar();
@@ -101,10 +102,7 @@ const PregnancyList = () => {
       {/* Header */}
       <Box display="flex" justifyContent="space-between" mb={2}>
         <Typography variant="h5">Pregnancy Status</Typography>
-        <Button variant="contained" onClick={() => setOpen(true)} sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}>
+        <Button variant="contained" onClick={() => setOpen(true)} className="bg-color">
           Add Status
         </Button>
       </Box>
@@ -175,7 +173,7 @@ const PregnancyList = () => {
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button sx={{color:"rgb(42,8,11)"}}
+          <Button className="color"
             onClick={() => {
               setOpen(false);
               resetForm();
@@ -183,10 +181,7 @@ const PregnancyList = () => {
           >
             Cancel
           </Button>
-          <Button variant="contained" onClick={handleAdd} sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}>
+          <Button variant="contained" onClick={handleAdd} className="bg-color">
             Add
           </Button>
         </DialogActions>

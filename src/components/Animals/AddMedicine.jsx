@@ -17,6 +17,7 @@ import {
   timeSlotList,
   getAllMedicines,
 } from "../../services";
+import "../../index.css";
 
 const AddMedicine = () => {
   const { showSnackbar } = useSnackbar();
@@ -214,10 +215,7 @@ const animalTags = location.state?.animalTags || [];
           <Button
             variant="contained"
             onClick={handleSubmit}
-            sx={{
-              backgroundColor: "rgb(42, 8, 11)",
-              "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-            }}
+            className="bg-color"
           >
             Save Medicine
           </Button>

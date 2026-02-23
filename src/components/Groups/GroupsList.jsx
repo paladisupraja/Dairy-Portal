@@ -27,6 +27,7 @@ import {
   createGroup,
 } from "../../services";
 import { useSnackbar } from "../../context/SnackbarContext";
+import "../../index.css";
 
 const GroupsList = () => {
   const [groups, setGroups] = useState([]);
@@ -157,10 +158,7 @@ const GroupsList = () => {
         <Typography variant="h5" fontWeight={600}>
           Groups List
         </Typography>
-        <Button sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}variant="contained" onClick={() => setOpenAddGroup(true)}>
+        <Button variant="contained" onClick={() => setOpenAddGroup(true)} className="bg-color">
           Add Group
         </Button>
       </Box>
@@ -323,11 +321,8 @@ const GroupsList = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpenAddGroup(false)} sx={{color:"rgb(42, 8, 11)"}}>Cancel</Button>
-          <Button variant="contained"  sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}onClick={handleAddGroup} disabled={submitting}>
+          <Button onClick={() => setOpenAddGroup(false)} className="color">Cancel</Button>
+          <Button variant="contained" className="bg-color" onClick={handleAddGroup} disabled={submitting}>
             {submitting ? "Creating..." : "Create Group"}
           </Button>
         </DialogActions>

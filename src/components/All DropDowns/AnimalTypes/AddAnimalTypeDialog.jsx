@@ -1,5 +1,6 @@
 import React from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, CircularProgress } from "@mui/material";
+import "../../../index.css";
 
 const AddAnimalTypeDialog = ({ open, onClose, newType, setNewType, onAdd, adding }) => {
   return (
@@ -17,10 +18,10 @@ const AddAnimalTypeDialog = ({ open, onClose, newType, setNewType, onAdd, adding
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} sx={{ color: "rgb(42,8,11)" }}>Cancel</Button>
+        <Button onClick={onClose} className="color">Cancel</Button>
         <Button
           variant="contained"
-          sx={{ backgroundColor: "rgb(42,8,11)", "&:hover": { backgroundColor: "rgb(30,5,5)" } }}
+         className="bg-color"
           onClick={onAdd}
           disabled={adding}
         >

@@ -21,6 +21,7 @@ import GrassIcon from "@mui/icons-material/Grass";
 import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 
 import { useNavigate, useLocation } from "react-router-dom";
+import "../index.css"
 
 const drawerWidth = 280;
 const collapsedWidth = 60;
@@ -75,9 +76,9 @@ const SideNav = ({ open }) => {
     >
       {/* Header */}
       <Box
+      className="bg-color"
         sx={{
-          bgcolor: "rgb(42, 8, 11)",
-          color: "#fff",
+          
           p: 2,
           display: "flex",
           alignItems: "center",
@@ -120,17 +121,17 @@ const SideNav = ({ open }) => {
     px: 2.5,
     // Custom selected background
     "&.Mui-selected": {
-      bgcolor: "rgba(42, 8, 11, 0.15)", // light shade for selected
+      bgcolor: "rgba(36, 8, 174, 0.15)", // light shade for selected
       "&:hover": {
-        bgcolor: "rgba(42, 8, 11, 0.2)", // slightly darker on hover
+        bgcolor: "rgba(36, 8, 174, 0.2)", // slightly darker on hover
       },
     },
     "&:hover": {
       bgcolor: item.highlightPaths.some(p =>
         location.pathname.startsWith(p)
       )
-        ? "rgba(42, 8, 11, 0.2)" // keep hover darker for selected
-        : "rgba(0,0,0,0.04)", // default hover for unselected
+        ? "rgba(36, 8, 174, 0.15)" // keep hover darker for selected
+        : "rgba(36, 8, 174, 0.15)", // default hover for unselected
     },
   }}
 >
@@ -141,7 +142,7 @@ const SideNav = ({ open }) => {
                   minWidth: 0,
                   mr: open ? 3 : "auto",
                   justifyContent: "center",
-                  color: "rgb(42, 8, 11)",
+                  color: "navy",
                 }}
               >
                 {item.icon}

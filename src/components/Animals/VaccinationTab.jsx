@@ -25,6 +25,7 @@ import {
   getVaccineTypes,
   addVaccination,
 } from "../../services";
+import "../../index.css";
 
 const VaccinationTab = ({ animalId }) => {
   const { showSnackbar } = useSnackbar();
@@ -113,10 +114,7 @@ const VaccinationTab = ({ animalId }) => {
             <Typography variant="h6">
               Vaccination Records – <b>Animal ID: {animalId}</b>
             </Typography>
-            <Button variant="contained" onClick={() => setOpen(true)} sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>
+            <Button variant="contained" onClick={() => setOpen(true)} className="bg-color">
               Add Vaccine
             </Button>
           </Box>
@@ -207,11 +205,8 @@ const VaccinationTab = ({ animalId }) => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpen(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" onClick={handleSubmit} sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>
+          <Button onClick={() => setOpen(false)} className="color">Cancel</Button>
+          <Button variant="contained" onClick={handleSubmit} className="bg-color">
             Save
           </Button>
         </DialogActions>

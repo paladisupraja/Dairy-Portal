@@ -24,6 +24,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
+import "../../index.css";
 
 import {
   getEmployees,
@@ -38,6 +39,7 @@ import { useSnackbar } from "../../context/SnackbarContext";
 const MilkRecords = () => {
   const { showSnackbar } = useSnackbar();
 
+  /* ================== STATES ================== */
   const [employees, setEmployees] = useState([]);
   const [groups, setGroups] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
@@ -56,14 +58,14 @@ const MilkRecords = () => {
     quantity: "",
     session: "Am",
     date: today,
-    employee_id: ""
+    employee_id: "",
   });
 
   const user = JSON.parse(localStorage.getItem("user"));
   const isEmployee = user?.role === "employee";
   const farmId = user?.farm_id;
 
-  // ---------------- FETCH GROUPS + EMPLOYEES ----------------
+  /* ================== INITIAL FETCH ================== */
   useEffect(() => {
     fetchGroups();
     fetchEmployees();
@@ -80,7 +82,9 @@ const MilkRecords = () => {
       }
 
       setGroups(data);
-      if (data.length) setSelectedGroup(data[0].group_id);
+      if (data.length) {
+        setSelectedGroup(data[0].group_id);
+      }
     } catch {
       showSnackbar("Failed to load groups", "error");
     } finally {
@@ -92,12 +96,16 @@ const MilkRecords = () => {
     try {
       const res = await getEmployees({ farm_id: farmId });
       setEmployees(res?.data?.details || []);
-    } catch {}
+    } catch {
+      showSnackbar("Failed to load employees", "error");
+    }
   };
 
-  // ---------------- FETCH ANIMALS ----------------
+  /* ================== FETCH ANIMALS + TODAY MILK ================== */
   useEffect(() => {
-    if (selectedGroup) fetchGroupAnimals(selectedGroup);
+    if (selectedGroup) {
+      fetchGroupAnimals(selectedGroup);
+    }
   }, [selectedGroup]);
 
   const fetchGroupAnimals = async (groupId) => {
@@ -108,7 +116,8 @@ const MilkRecords = () => {
       const animals = groupRes.data.details.animals || [];
 
       setGroupEmployee({
-        employee_id: groupRes.data.details.employee_id?.toString(),
+        employee_id:
+          groupRes.data.details.employee_id?.toString() || "",
         employee_name: groupRes.data.details.employee_name,
       });
 
@@ -116,11 +125,17 @@ const MilkRecords = () => {
       const milkAnimals = milkRes.data.details.animals || [];
 
       const merged = animals.map((animal) => {
-        const milk = milkAnimals.find((m) => m.tag_no === animal.tag_no);
+        const milk = milkAnimals.find(
+          (m) => m.tag_no === animal.tag_no
+        );
+
         const todayRecord =
           milk?.records?.find((r) => r.date === today) || null;
 
-        return { ...animal, record: todayRecord };
+        return {
+          ...animal,
+          record: todayRecord,
+        };
       });
 
       setGroupAnimals(merged);
@@ -131,7 +146,7 @@ const MilkRecords = () => {
     }
   };
 
-  // ---------------- UI HANDLERS ----------------
+  /* ================== UI HANDLERS ================== */
   const handleToggle = (id) => {
     setOpenAnimal(openAnimal === id ? null : id);
   };
@@ -152,46 +167,43 @@ const MilkRecords = () => {
       quantity: "",
       session: "Am",
       date: today,
-      employee_id: groupEmployee.employee_id || ""
+      employee_id: groupEmployee.employee_id,
     });
+
     setOpenAdd(true);
   };
 
   const handleOpenEdit = (animal) => {
+    const rec = animal.record;
+
     setSelectedAnimal(animal);
 
     setForm({
-      quantity:
-        animal.record?.pm_quantity ?? animal.record?.am_quantity ?? "",
-      session: animal.record?.pm_quantity ? "Pm" : "Am",
-      date: animal.record?.date || today,
-      employee_id: groupEmployee?.employee_id || ""
+      quantity: rec?.pm_quantity ?? rec?.am_quantity ?? "",
+      session: rec?.pm_quantity ? "Pm" : "Am",
+      date: rec?.date || today,
+      employee_id: groupEmployee?.employee_id || "",
     });
 
     setOpenEdit(true);
   };
 
-  // ---------------- SAVE ----------------
+  /* ================== SAVE ================== */
   const handleSaveMilk = async () => {
     if (!selectedAnimal) return;
 
-    if (selectedAnimal.gender === "Male") {
-      showSnackbar("Male animals cannot produce milk", "error");
-      return;
-    }
-
-    if (!form.employee_id && !groupEmployee?.employee_id) {
-      showSnackbar("No employee assigned", "error");
+    if (!form.quantity || Number(form.quantity) <= 0) {
+      showSnackbar("Enter valid quantity", "warning");
       return;
     }
 
     const payload = {
       animalTagNo: selectedAnimal.tag_no,
-      employee_id: form.employee_id || groupEmployee.employee_id,
+      employee_id: form.employee_id,
       quantity: Number(form.quantity),
       date: form.date,
       session: form.session,
-      colostrum_milk: false
+      colostrum_milk: false,
     };
 
     try {
@@ -205,19 +217,22 @@ const MilkRecords = () => {
       } else {
         showSnackbar(res.data.message || "Save failed", "error");
       }
-
     } catch (err) {
-      showSnackbar(err?.response?.data?.message || "Save failed", "error");
+      showSnackbar(
+        err?.response?.data?.message || "Save failed",
+        "error"
+      );
     }
   };
 
-  // ---------------- UI ----------------
+  /* ================== UI ================== */
   return (
     <Box display="flex" height="100%" mt={3}>
-
-      {/* GROUP LIST */}
+      {/* LEFT SIDE GROUP LIST */}
       <Box width="25%" borderRight="1px solid #ddd">
-        <Typography variant="h6" p={2}>Groups</Typography>
+        <Typography variant="h6" p={2}>
+          Groups
+        </Typography>
         <Divider />
 
         <List>
@@ -234,13 +249,15 @@ const MilkRecords = () => {
       </Box>
 
       {/* RIGHT SIDE */}
-      <Box width="75%" p={1}>
-        <Typography variant="h5" mb={2}>🥛 Milk Records</Typography>
+      <Box width="75%" p={2}>
+        <Typography variant="h5" mb={2}>
+          🥛 Milk Records (Today)
+        </Typography>
 
         {loading && <CircularProgress />}
 
-        {!loading && (
-          groupAnimals.length > 0 ? (
+        {!loading &&
+          (groupAnimals.length > 0 ? (
             groupAnimals.map((animal) => (
               <Card key={animal.id} sx={{ mb: 2 }}>
                 <CardContent>
@@ -293,7 +310,7 @@ const MilkRecords = () => {
                             <td>{groupEmployee?.employee_name || "No Employee"}</td>
                             <td>
                               <IconButton
-                                color="primary"
+                                className="color"
                                 onClick={() => handleOpenEdit(animal)}
                               >
                                 <EditIcon />
@@ -312,14 +329,11 @@ const MilkRecords = () => {
               </Card>
             ))
           ) : (
-            <Typography color="error" mt={3} >
-              No animals found in this group.
-            </Typography>
-          )
-        )}
+            <Typography>No animals found</Typography>
+          ))}
       </Box>
 
-      {/* DIALOG */}
+      {/* ADD / EDIT DIALOG */}
       <Dialog
         open={openAdd || openEdit}
         onClose={() => {
@@ -374,11 +388,17 @@ const MilkRecords = () => {
             margin="dense"
             value={form.employee_id}
             onChange={(e) =>
-              setForm({ ...form, employee_id: e.target.value })
+              setForm({
+                ...form,
+                employee_id: e.target.value,
+              })
             }
           >
             {employees.map((emp) => (
-              <MenuItem key={emp.employee_id} value={emp.employee_id}>
+              <MenuItem
+                key={emp.employee_id}
+                value={emp.employee_id}
+              >
                 {emp.employee_name}
               </MenuItem>
             ))}
@@ -386,14 +406,21 @@ const MilkRecords = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => {
-            setOpenAdd(false);
-            setOpenEdit(false);
-          }}>
+          <Button
+            onClick={() => {
+              setOpenAdd(false);
+              setOpenEdit(false);
+            }}
+             className="color"
+          >
             Cancel
           </Button>
 
-          <Button variant="contained" onClick={handleSaveMilk}>
+          <Button
+            variant="contained"
+            onClick={handleSaveMilk}
+           className="bg-color"
+          >
             Save
           </Button>
         </DialogActions>

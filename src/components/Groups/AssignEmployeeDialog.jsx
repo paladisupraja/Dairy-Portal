@@ -18,6 +18,7 @@ import {
 
 import { getEmployees, assignEmployeeToGroup, unAssignEmployeeToGroup } from "../../services";
 import { useSnackbar } from "../../context/SnackbarContext";
+import "../../index.css";
 
 const AssignEmployeeDialog = ({ open, onClose, group }) => {
   const { showSnackbar } = useSnackbar();
@@ -165,11 +166,8 @@ const AssignEmployeeDialog = ({ open, onClose, group }) => {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={() => onClose(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-        <Button variant="contained" onClick={handleAssign} sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>
+        <Button onClick={() => onClose(false)} className="color">Cancel</Button>
+        <Button variant="contained" onClick={handleAssign} className="bg-color">
           {selectedEmployee ? "Assign" : "Unassign"}
         </Button>
       </DialogActions>

@@ -8,6 +8,7 @@ import {
   Table, TableHead, TableRow, TableCell, TableBody,
   CircularProgress, Button, IconButton
 } from "@mui/material";
+import "../../index.css";
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
@@ -59,10 +60,8 @@ const EmployeeList = () => {
             {/* Add Employee button for all users */}
             <Button
               variant="contained"
-              component={Link}  sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}
+              component={Link}  
+              className="bg-color"
               to="/add-employee"
               state={isEmployee ? { farm_id: user.farm_id } : {}}
             >
@@ -103,8 +102,7 @@ const EmployeeList = () => {
         <TableCell>
           {/* Edit button visible for everyone */}
           <IconButton
-            sx={{
-        color: "rgb(30, 5, 5)"}}
+            className="color"
             onClick={() => navigate("/update-employee", { state: emp })} 
           >
             <EditIcon />

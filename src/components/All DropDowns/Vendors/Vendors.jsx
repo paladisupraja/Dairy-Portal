@@ -29,6 +29,7 @@ import {
   deleteVendor,
 } from "../../../services";
 import { useSnackbar } from "../../../context/SnackbarContext";
+import "../../../index.css";
 
 const initialVendorState = {
   vendor_name: "",
@@ -168,10 +169,7 @@ const Vendors = () => {
         <Button
           size="small"
           variant="contained"
-          sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}
+          className="bg-color"
           onClick={() => {
             resetForm();
             setDialogOpen(true);
@@ -208,7 +206,7 @@ const Vendors = () => {
                   <TableCell align="center">{vendor.phone_number}</TableCell>
                   <TableCell align="center">{vendor.bank_acc_no}</TableCell>
                   <TableCell align="center">
-                    <IconButton size="small" sx={{color:"rgb(42,8,11)"}} onClick={() => handleEdit(vendor)}>
+                    <IconButton size="small" className="color" onClick={() => handleEdit(vendor)}>
                       <EditIcon fontSize="small" />
                     </IconButton>
                     <IconButton
@@ -267,7 +265,7 @@ const Vendors = () => {
         <DialogActions>
           <Button
             size="small"
-            sx={{color:"rgb(42,8,11)"}}
+            className="color"
             onClick={() => {
               setDialogOpen(false);
               resetForm();
@@ -278,10 +276,7 @@ const Vendors = () => {
           <Button
             size="small"
             variant="contained"
-             sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}
+            className="bg-color"
             onClick={handleSave}
             disabled={saving}
           >

@@ -22,6 +22,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import "../../../index.css";
 
 import {
   timeSlotList,
@@ -123,10 +124,7 @@ const TimeSlots = () => {
         <Typography variant="h5">Time Slots</Typography>
         <Button
           variant="contained"
-          sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}
+          className="bg-color"
           onClick={() => {
             resetForm();
             setOpen(true);
@@ -246,11 +244,8 @@ const TimeSlots = () => {
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}onClick={handleSave}>
+          <Button onClick={() => setOpen(false)} className="color">Cancel</Button>
+          <Button variant="contained" onClick={handleSave} className="bg-color">
             {isEdit ? "Update" : "Add"}
           </Button>
         </DialogActions>

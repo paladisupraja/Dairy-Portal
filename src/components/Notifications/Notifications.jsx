@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { getNotifications, markAsReadNotifications } from "../../services";
 import { NotificationContext } from "../../context/NotificationContext";
+import "../../index.css";
 
 const Notifications = () => {
   const { setNotifications, refreshUnreadCount } = useContext(NotificationContext);
@@ -93,7 +94,8 @@ const Notifications = () => {
     <Box maxWidth="800px" mx="auto" p={3}>
       <Box display="flex" alignItems="center" justifyContent="space-between" mb={3}>
         <Typography
-          sx={{ cursor: "pointer", color: "rgb(42,8,11)", fontWeight: 600, minWidth: "80px" }}
+        className="color"
+          sx={{ cursor: "pointer",fontWeight: 600, minWidth: "80px" }}
           onClick={() => navigate(-1)}
         >
           ← Back

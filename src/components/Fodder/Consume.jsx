@@ -30,6 +30,7 @@ import {
   addDailyConsumption,
   getConsumptionReports,
 } from "../../services";
+import "../../index.css"
 
 const Consume = () => {
   const { showSnackbar } = useSnackbar();
@@ -143,8 +144,7 @@ const handleSubmit = async () => {
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          sx={{ backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },}}
+         className="bg-color"
           onClick={() => setFormVisible(true)}
         >
           Add Consumption
@@ -303,8 +303,7 @@ const handleSubmit = async () => {
           <Button
             variant="contained"
             fullWidth
-            sx={{ mt: 2, backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },}}
+            className="bg-color"
             onClick={handleSubmit}
             disabled={loading}
           >

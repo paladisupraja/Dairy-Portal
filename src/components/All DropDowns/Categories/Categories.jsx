@@ -29,6 +29,7 @@ import {
   deleteMedicineCategory,
 } from "../../../services";
 import { useSnackbar } from "../../../context/SnackbarContext";
+import "../../../index.css";
 
 const Categories = () => {
   const { showSnackbar } = useSnackbar();
@@ -121,10 +122,7 @@ const Categories = () => {
       {/* Header */}
       <Box display="flex" justifyContent="space-between" mb={2}>
         <Typography variant="h5">Medicine Categories</Typography>
-        <Button variant="contained" sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}onClick={() => setOpen(true)}>
+        <Button variant="contained" className="bg-color" onClick={() => setOpen(true)}>
           Add Category
         </Button>
       </Box>
@@ -151,7 +149,7 @@ const Categories = () => {
                   <TableCell sx={{py:1}}>{row.description || "-"}</TableCell>
                   <TableCell align="center" sx={{py:1}}>
                     <IconButton onClick={() => openEdit(row)}>
-                      <EditIcon sx={{color:"rgb(42,8,11)"}} />
+                      <EditIcon className="color" />
                     </IconButton>
                     <IconButton
                       color="error"
@@ -204,13 +202,10 @@ const Categories = () => {
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => { setOpen(false); resetForm(); }} sx={{color:"rgb(42,8,11)"}}>
+          <Button onClick={() => { setOpen(false); resetForm(); }} className="color">
             Cancel
           </Button>
-          <Button variant="contained" onClick={handleSave} sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}>
+          <Button variant="contained" onClick={handleSave} className="bg-color">
             {isEdit ? "Update" : "Add"}
           </Button>
         </DialogActions>

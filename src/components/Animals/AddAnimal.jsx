@@ -8,6 +8,7 @@ import { AnimalDropdownContext } from "../../context/AnimalDropdownContext";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
 import MedicationIcon from "@mui/icons-material/Medication";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
+import "../../index.css";
 
 const AddAnimal = () => {
 
@@ -117,8 +118,8 @@ const AddAnimal = () => {
         {/* Header */}
         <Box display="flex" justifyContent="space-between" mb={3}>
           
-          <Button startIcon={<ArrowBackIcon />}  sx={{
-                textTransform: "none",fontWeight: 500,color: "rgb(42, 8, 11)"
+          <Button startIcon={<ArrowBackIcon />}  className="color" sx={{
+                textTransform: "none",fontWeight: 500
       
               }} onClick={() => navigate("/animals")}>Back</Button>
           <Typography variant="h5">Add Animal</Typography>
@@ -216,10 +217,7 @@ const AddAnimal = () => {
 
         {/* Save */}
         <Box textAlign="right" mt={3}>
-          <Button variant="contained" onClick={handleSubmit}  sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>
+          <Button variant="contained" onClick={handleSubmit} className="bg-color">
             Save Animal
           </Button>
         </Box>

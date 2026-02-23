@@ -28,6 +28,7 @@ import {
   deleteBreedingRecord,
 } from "../../../../services";
 import { useSnackbar } from "../../../../context/SnackbarContext";
+import "../../../../index.css";
 
 const BREEDING_TYPES = ["Artificial", "Natural"];
 const BREEDING_STATUS = ["Successful", "Pending", "Failed"];
@@ -136,10 +137,7 @@ const BreedingList = () => {
         <CardContent>
           <Box display="flex" justifyContent="space-between" alignItems="center">
             <Typography variant="h6">Breeding Records</Typography>
-            <Button variant="contained" onClick={() => setOpen(true)} sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>Add Breeding</Button>
+            <Button variant="contained" onClick={() => setOpen(true)} className="bg-color">Add Breeding</Button>
           </Box>
 
           <Typography mt={1}>Total: <b>{breedingRecords.length}</b></Typography>
@@ -219,11 +217,8 @@ const BreedingList = () => {
           <TextField label="Heat ID" name="heat_id" value={form.heat_id ?? ""} onChange={handleChange} fullWidth />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" onClick={handleSubmit} sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>Save</Button>
+          <Button onClick={() => setOpen(false)} className="color">Cancel</Button>
+          <Button variant="contained" onClick={handleSubmit} className="bg-color">Save</Button>
         </DialogActions>
       </Dialog>
     </>

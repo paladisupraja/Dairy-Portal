@@ -19,6 +19,7 @@ import MedicineList from "./Medicines/MedicineList";
 import PregnancyList from "./Pregnancy/PregnancyList";
 import AnimalLists from "./AnimalLifecycles/AnimalLists";
 import BreedingLifeCycle from "./BreedingTypes/BreedingLifeCycle";
+import Schedulers from "./Notifications/Schedulers";
 
 const AllDropDowns = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -57,13 +58,13 @@ const AllDropDowns = () => {
               minWidth: "auto",
             },
            "& .MuiTab-root.Mui-selected": {
-              color: "rgb(42,8,11)",
+              color: "navy",
               fontWeight: 600,
             },
           }}
           TabIndicatorProps={{
             sx: {
-              backgroundColor: "rgb(42,8,11)",
+              backgroundColor: "navy",
               height: "3px",
             },
           }}
@@ -86,6 +87,7 @@ const AllDropDowns = () => {
           <Tab label = "Pregnancy Lists"/>
           <Tab label="Animal LifeCycle"/>
           <Tab label="Breeding LifeCycle"/>
+          <Tab label="Notifications"/>
         </Tabs>
       </Box>
 
@@ -109,6 +111,7 @@ const AllDropDowns = () => {
         {tabIndex===15 && <PregnancyList/>}
         {tabIndex===16 && <AnimalLists/>}
         {tabIndex===17 && <BreedingLifeCycle/>}
+        {tabIndex===18 && <Schedulers/>}
       </Box>
     </Box>
   );

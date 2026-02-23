@@ -26,6 +26,7 @@ import {
   deleteFodderType,
 } from "../../../services";
 import { useSnackbar } from "../../../context/SnackbarContext";
+import "../../../index.css";
 
 const FodderTypes = () => {
   const { showSnackbar } = useSnackbar();
@@ -96,10 +97,7 @@ const FodderTypes = () => {
       {/* Header */}
       <Box display="flex" justifyContent="space-between" mb={2}>
         <Typography variant="h5">Fodder Types</Typography>
-        <Button size="small" variant="contained" sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}onClick={() => setAddOpen(true)}>
+        <Button size="small" variant="contained" className="bg-color" onClick={() => setAddOpen(true)}>
           Add
         </Button>
       </Box>
@@ -168,11 +166,8 @@ const FodderTypes = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button size="small" onClick={() => setAddOpen(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button size="small" variant="contained" onClick={handleAdd} sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}disabled={adding}>
+          <Button size="small" onClick={() => setAddOpen(false)} className="color">Cancel</Button>
+          <Button size="small" variant="contained" onClick={handleAdd} className="bg-color" disabled={adding}>
             {adding ? <CircularProgress size={18} /> : "Add"}
           </Button>
         </DialogActions>

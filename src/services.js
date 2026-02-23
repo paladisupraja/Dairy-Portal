@@ -507,3 +507,10 @@ export const getMedicineStats=async()=>{
 export const getPastureDetailsById=async(pastureId)=>{
   return await axios.get(`${API_URL}/getPastureWithDetails?pastureId=${pastureId}`)
 }
+
+export const getSchedulers=async()=>{
+  return await axios.get(`${API_URL}/schedulers`);
+}
+export const updateSchedulers=async(data)=>{
+  return await axios.post(`${API_URL}/updateScheduler`,data);
+}

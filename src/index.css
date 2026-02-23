@@ -1,0 +1,17 @@
+.bg-color{
+    background-color: navy !important;
+    color: white !important;
+}
+
+.color{
+    color:navy !important;
+
+}
+.MuiDrawer-paper .color{
+    background-color: navy !important;
+    color: white !important;
+}
+.tabs-theme .MuiTabs-indicator {
+  background-color: navy !important;
+  height: 3px;
+}

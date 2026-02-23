@@ -25,6 +25,7 @@ import {
   getAllMedicines,
 } from "../../services";
 import { useSnackbar } from "../../context/SnackbarContext";
+import "../../index.css";
 import VaccinationTab from "./VaccinationTab";
 
 const HealthTab = ({ animalId }) => { // ✅ accept animalId as prop
@@ -127,10 +128,7 @@ const HealthTab = ({ animalId }) => { // ✅ accept animalId as prop
             <Typography variant="h6">
               Medicine History – <b>{tagNo}</b>
             </Typography>
-            <Button variant="contained" onClick={() => setOpen(true)} sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>
+            <Button variant="contained" onClick={() => setOpen(true)} className="bg-color">
               Add Medicine
             </Button>
           </Box>
@@ -209,11 +207,8 @@ const HealthTab = ({ animalId }) => { // ✅ accept animalId as prop
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpen(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" onClick={handleSubmit} sx={{
-    backgroundColor: "rgb(42, 8, 11)", // Correct way to style MUI Button
-    "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-  }}>
+          <Button onClick={() => setOpen(false)} className="color">Cancel</Button>
+          <Button variant="contained" onClick={handleSubmit} className="bg-color">
             Save
           </Button>
         </DialogActions>

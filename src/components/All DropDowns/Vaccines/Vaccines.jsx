@@ -28,6 +28,7 @@ import {
   addVaccineType,
   deleteVaccineType,
 } from "../../../services";
+import "../../../index.css";
 
 const Vaccines = () => {
   const { showSnackbar } = useSnackbar();
@@ -101,10 +102,7 @@ const Vaccines = () => {
         <Typography variant="h6">Vaccine Types</Typography>
         <Button
           variant="contained"
-          sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}
+          className="bg-color"
           startIcon={<AddIcon />}
           onClick={() => setOpen(true)}
         >
@@ -188,11 +186,8 @@ const Vaccines = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpen(false)} sx={{color:"rgb(42,8,11)"}}>Cancel</Button>
-          <Button variant="contained" onClick={handleAdd} sx={{
-            backgroundColor: "rgb(42, 8, 11)",
-            "&:hover": { backgroundColor: "rgb(30, 5, 5)" },
-          }}>
+          <Button onClick={() => setOpen(false)} className="color">Cancel</Button>
+          <Button variant="contained" onClick={handleAdd} className="bg-color">
             Save
           </Button>
         </DialogActions>

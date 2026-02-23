@@ -10,6 +10,7 @@ import InputInventory from "./InputInventory";
 import OutputInventory from "./OutputInventory";
 import StockManagement from "./StockInventory";
 import { getMedicineStats } from "../../services";
+import "../../index.css";
 
 const Medicine = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -93,13 +94,13 @@ const Medicine = () => {
               padding: "12px 0",
             },
             "& .MuiTab-root.Mui-selected": {
-              color: "rgb(42,8,11)",
+              color: "navy",
               fontWeight: 600,
             },
           }}
           TabIndicatorProps={{
             sx: {
-              backgroundColor: "rgb(42,8,11)",
+              backgroundColor: "navy",
               height: 3,
             },
           }}

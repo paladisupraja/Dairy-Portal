@@ -127,8 +127,8 @@ const AnimalEditForm = () => {
       <CardContent>
 
         <Box display="flex" justifyContent="space-between" mb={3}>
-          <Button startIcon={<ArrowBackIcon />} onClick={() => navigate("/animals")} sx={{
-                textTransform: "none",color: "rgb(42, 8, 11)"
+          <Button startIcon={<ArrowBackIcon />} onClick={() => navigate("/animals")} className="color" sx={{
+                textTransform: "none"
       
               }}>
             Back
@@ -210,7 +210,7 @@ const AnimalEditForm = () => {
         </Box>
 
         <Box textAlign="right" mt={3}>
-          <Button variant="contained" onClick={handleUpdate} sx={{backgroundColor: "rgb(42, 8, 11)", "&:hover": { backgroundColor: "rgb(30, 5, 5)" }}}>
+          <Button variant="contained" onClick={handleUpdate} className="bg-color">
             Update Animal
           </Button>
         </Box>
