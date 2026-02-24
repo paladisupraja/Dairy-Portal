@@ -19,6 +19,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import GrassIcon from "@mui/icons-material/Grass";
 import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 import { useNavigate, useLocation } from "react-router-dom";
 import "../index.css"
@@ -27,6 +28,12 @@ const drawerWidth = 280;
 const collapsedWidth = 60;
 
 const allMenuItems = [
+  { 
+  text: "Dashboard", 
+  icon: <DashboardIcon />, 
+  path: "/counts", 
+  highlightPaths: ["/counts"] 
+},
   { text: "Employees", icon: <PersonIcon />, path: "/employees", highlightPaths: ["/employees", "/add-employee", "/update-employee"] },
   { text: "Animals", icon: <PetsIcon />, path: "/animals", highlightPaths: ["/animals", "/add-animal", "/update-animal","/edit-animal-form"] },
   { text: "Grouping", icon: <GroupsIcon />, path: "/grouping", highlightPaths: ["/grouping"] },

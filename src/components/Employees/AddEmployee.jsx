@@ -56,7 +56,31 @@ const AddEmployee = () => {
   const [formData, setFormData] = useState({ ...DEFAULT_PAYLOAD, farm_id: prefilledFarmId });
   const [loading, setLoading] = useState(false);
   const today = new Date().toISOString().split("T")[0];
-  const commonProps = { fullWidth: true, size: "small", variant: "outlined" };
+   const commonProps = {
+    fullWidth: true,
+    size: "small",
+    variant: "outlined",
+    sx: {
+      "& .MuiInputLabel-root": {
+        color: "black",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "black",
+      },
+      "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+          borderColor: "black",
+        },
+        "&:hover fieldset": {
+          borderColor: "black",
+        },
+        "&.Mui-focused fieldset": {
+          borderColor: "black",
+        },
+      },
+    },
+  };
+
 
   // ================= NAVIGATION =================
   const handleBack = () => navigate("/employees");
@@ -198,7 +222,7 @@ const AddEmployee = () => {
             <TextField {...commonProps} select label="Farm" name="farm_id" value={formData.farm_id || ""} onChange={handleChange} disabled={isEmployee} placeholder="Select Farm">
               {pastures.map((p) => <MenuItem key={p.pasture_id} value={p.pasture_id}>{p.name}</MenuItem>)}
             </TextField>
-            <TextField {...commonProps} label="Address" name="address" value={formData.address} onChange={handleChange} sx={{ flex: "1 1 100%" }} placeholder="Enter Address" />
+            <TextField {...commonProps} label="Address" name="address" value={formData.address} onChange={handleChange} sx={{...commonProps.sx, flex: "1 1 100%" }} placeholder="Enter Address" />
             <TextField {...commonProps} label="Password" type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Enter Password" />
           </Box>
 

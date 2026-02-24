@@ -129,7 +129,7 @@ const AddAnimal = () => {
         {/* Form */}
         <Box display="grid" gridTemplateColumns="repeat(3,1fr)" gap={2}>
 
-          <TextField label="Tag" name="tag_no" value={formData.tag_no} onChange={handleChange} />
+          <TextField label="Tag" className="label" value={formData.tag_no} onChange={handleChange} name="tag_no" />
 
           <TextField select label="Animal Type" name="animal_type" value={formData.animal_type} onChange={handleChange}>
             <MenuItem value="">Select</MenuItem>

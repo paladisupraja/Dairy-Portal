@@ -15,3 +15,33 @@
   background-color: navy !important;
   height: 3px;
 }
+/* LABEL DEFAULT */
+.MuiInputLabel-root {
+  color: #222 !important;
+  font-weight: 500;
+}
+
+/* LABEL WHEN FOCUSED */
+.MuiInputLabel-root.Mui-focused {
+  color: #000 !important;
+}
+
+/* INPUT TEXT COLOR */
+.MuiInputBase-input {
+  color: #000 !important;
+}
+
+/* BORDER DEFAULT */
+.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: #444 !important;
+}
+
+/* BORDER HOVER */
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #000 !important;
+}
+
+/* BORDER FOCUSED */
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #000 !important;
+}
